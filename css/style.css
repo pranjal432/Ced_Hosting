@@ -1641,6 +1641,22 @@ a.button4:hover {
 .register-but{
 	margin-top:1em;
 }
+
+.a {
+    background: #e7663f;
+	color: #FFF;
+	font-size: 1.2em;
+	padding: 0.6em 2em;
+	transition: 0.5s all;
+	-webkit-transition: 0.5s all;
+	-moz-transition: 0.5s all;
+	-o-transition: 0.5s all;
+	display: inline-block;
+	text-transform: uppercase;
+	border: none;
+	outline: none;
+}
+
 .register-but form input[type="submit"] {
 	background: #e7663f;
 	color: #FFF;
