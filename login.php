@@ -1,5 +1,5 @@
 <!--
-Au<!--
+Au
 Author: W3layouts
 Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
@@ -8,6 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 
+session_start();
 require "header.php";
 require "Config.php";
 require "User.php";
@@ -31,7 +32,7 @@ require "User.php";
 									<form method="POST">
 									  <div>
 										<span>Email Address<label>*</label></span>
-										<input type="email" name="email" required> 
+										<input type="email" name="email" style="width:300px;height:30px;" required> 
 									  </div>
 									  <div>
 										<span>Password<label>*</label></span>

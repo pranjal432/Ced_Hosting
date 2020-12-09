@@ -1,5 +1,7 @@
 <?php
 
+    
+
     class User {
 
         function signup($connn,$name,$email,$mobile,$password,$securityquestion,$securityanswer) {
@@ -9,7 +11,7 @@
             $password=md5($password);
             
 
-            $sql1="SELECT * from `tbl_user` WHERE `email`='".$email."'";
+            $sql1="SELECT * from `tbl_user` WHERE `email`='".$email."' `mobile`=$mobile";
 
             $result=$connn->con->query($sql1);
 
@@ -33,7 +35,8 @@
                 
                 if ($connn->con->query($sql)==true) {
                     echo "New record created successfully";
-                    echo "<script>window.location='login.php';</script>";
+                    echo "<script>window.location='verification.php';</script>";
+                    $_SESSION['useremail']=$email;
                 } else {
                     $errors[]=array("input"=>"form","msg"=>"New record not created.");
                 }

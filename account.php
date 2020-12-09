@@ -1,8 +1,10 @@
 <?php
 
+session_start();
 require "header.php";
 require "User.php";
 require "Config.php";
+
 
 ?>
 		<!---login--->
@@ -11,7 +13,8 @@ require "Config.php";
 	<div class="main-1">
 		<div class="container">
 			<div class="register">
-		  	  <form method="POST"> 
+			<center><strong>Note :</strong><span> * means required</span></center>
+		  	  <form method="POST" onsubmit="return validate()" style="margin-top:10px;"> 
 				
 				 <div class="register-top-grid">
 					<h3>personal information</h3>
@@ -28,7 +31,7 @@ require "Config.php";
 						 <input type="email" id="email" name="email" style="width:524px;height:37px;" required> 
 					 </div>
 					 <div>
-						 <span>Mobile No. :</span>
+						 <span>Mobile No. :<label>*</label></span>
 						 <input type="text" id="mobile" name="mobile" style="width:524px;height:37px;margin-top:4px;" required> 
 					 </div>
 					 <div class="clearfix"> </div>
@@ -40,19 +43,28 @@ require "Config.php";
 						    <h3>login information</h3>
 							 <div>
 								<span>Password<label>*</label></span>
-								<input type="password" id="pass" minlength="8" name="password" required>
+								<input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" id="pass" maxlength="16" minlength="8" name="password" required>
 							 </div>
 							 <div>
 								<span>Confirm Password<label>*</label></span>
-								<input type="password" id="cpass" name="confirmpassword" minlength="8" required>
+								<input type="password" id="cpass" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" name="confirmpassword" maxlength="16" minlength="8" required>
 							 </div>
 							 <div>
-								<span>Add a security question:</span>
-								<input type="text" name="securityquestion" style="width:524px;height:37px;">
+								<span>Add a security question:<label>*</label></span>
+								<select name="securityquestion" id="squestion" style="width:524px;height:37px" required>
+                                        
+									<option value="" selected disabled hidden>--Select Security Question--</option>
+									<option value="nickname" >What was your childhood nickname?</option>
+									<option value="friend" >What is the name of your favourite childhood friend?</option>
+									<option value="place" >What was your favourite place to visit as a child?</option>
+									<option value="dreamjob" >What was your dream job as a child?</option>
+									<option value="teachername" >What is your favourite teacher's nickname?</option>
+                                        
+                                </select>
 							 </div>
 							 <div>
-								<span>Security answer</span>
-								<input type="text" id="sans" name="securityanswer" style="width:524px;height:37px;">
+								<span>Security answer<label>*</label></span>
+								<input type="text" id="sans" name="securityanswer" pattern="^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$" style="width:524px;height:37px;" required>
 							 </div>
 					</div>
 				
@@ -85,6 +97,8 @@ require "Config.php";
 		$securityquestion=isset($_POST['securityquestion'])?$_POST['securityquestion']:'';
 		$securityanswer=isset($_POST['securityanswer'])?$_POST['securityanswer']:'';
 
+		
+
 		if($password==$confirmpassword) {
 			$connn=new Dbcon();
 		    $signup=new User();
@@ -108,26 +122,56 @@ require "Config.php";
 <script>
 
 var count_mob=0;
+var count_mob2=0;
 var count_pass=0;
 var count_cpass=0;
 //var mobile_no='';
 var c=0;
 
-$("#email").bind("keypress", function (e) {
 
+function validate() {
+    
 	
-    var keyCode = e.which ? e.which : e.keyCode
-    if (!(keyCode==46) && !(keyCode >= 48 && keyCode <= 57) && !(keyCode >= 64 && keyCode <= 90) && !(keyCode >= 97 && keyCode <= 122)) {
-        //console.log(keycode);
-        return false;
-    }
+	if (Number.isInteger(parseInt($('#sans').val()))) {
+		alert('Enter Security Answer in Correct Fornat');
+		$('#sans').val("");
+		return false;
+	}
+	else {
+		return true;
+	}
 
-	
-	
+}
+
+$('#email').bind("keypress keyup keydown", function (e){
+
+var email = $('#email').val();
+var regtwodots = /^(?!.*?\.\.).*?$/;
+var lemail = email.length;
+if ((email.indexOf(".") == 0) || !(regtwodots.test(email))) {
+	alert("invalid email address");
+	$('#email').val("");
+	return;
+}
 });
 
 $("#mobile").bind("keypress", function (e) {
 
+	// count_mob2+=$("#mobile").length;
+
+	// if(count_mob2==10) {
+	// 	for(i=0;i<9;i++) {
+	// 		var a=$("#mobile").val().substr(i,1);
+	// 		var b=$("#mobile").val().substr(i+1,1);
+	// 		if(a==b) {
+	// 			$("#mobile").val("");
+				
+	// 			count_mob2=0;
+	// 		}
+	// 	 }
+	// }
+
+	
 	
 	var keyCode = e.which ? e.which : e.keyCode
 	if (!(keyCode >= 48 && keyCode <= 57)) {
@@ -137,100 +181,149 @@ $("#mobile").bind("keypress", function (e) {
 	
 });
 
+// $("#mobile").bind("paste", function(e){
+
+// 	e.preventDefault();
+    
+// 	// var pastedData = e.originalEvent.clipboardData.getData('text/plain');
+	
+// 	// if(pastedData.length==10) {
+
+// 	// 	for(i=0;i<10;i++) {
+// 	// 		// var a=$("#mobile").val().substr(i,1);
+// 	// 		// var b=$("#mobile").val().substr(i+1,1);
+// 	// 		// if(a==b) {
+// 	// 		// 	$("#mobile").val("");
+// 	// 		// }
+// 	// 		//console.log(pastedData[i]);
+// 	// 		var d=pastedData[i];
+// 	// 		var e=pastedData[i+1];
+			
+			
+
+// 	// 		if(d==e) {
+				
+				
+// 	// 		}
+
+// 	// 	}
+
+// 	// }
+// });
+
+$('#mobile').on("cut copy paste drag drop",function(e) {
+    e.preventDefault();
+});
+
 $("#mobile").bind("keyup", function (e) {
 
 	mobile_no=$("#mobile").val();
+	count_mob+=$("#mobile").length;
 
 	var fchar=$("#mobile").val().substr(0, 1);
 	var schar=$("#mobile").val().substr(1,1);
-	var tchar=$("#mobile").val().substr(2, 1);
-	var fochar=$("#mobile").val().substr(3, 1);
-	var fifchar=$("#mobile").val().substr(4, 1);
-	var sixchar=$("#mobile").val().substr(5, 1);
-	var sevchar=$("#mobile").val().substr(6, 1);
-	var eigchar=$("#mobile").val().substr(7, 1);
-	var ninchar=$("#mobile").val().substr(8, 1);
-	var tenchar=$("#mobile").val().substr(9, 1);
-
-	if(fchar==schar && schar==tchar && tchar==fochar && fochar==fifchar && fifchar==sixchar && sixchar==sevchar && sevchar==eigchar && eigchar==ninchar && ninchar==tenchar) {
-		$("#mobile").val("");
-	}
-	console.log(schar);
-
-	
 
 	if(fchar==0) {
 		$('#mobile').attr('maxlength','11');
 		$('#mobile').attr('minlength','11');
+		if(count_mob==10) {
+			for(i=1;i<11;i++) {
+				var a=$("#mobile").val().substr(i,1);
+				var b=$("#mobile").val().substr(i+1,1);
+				if(a==b) {
+					$("#mobile").val("");
+					count_mob=0;
+				}
+			}
+	    }
 		if(schar==0)
 		{
 			$("#mobile").val(0);
+			count_mob=0;
+			
 			if(fchar=="")
-		{
-			$("#mobile").val("");
-		}
+			{
+				$("#mobile").val("");
+				count_mob=0;
+			}
 			
 		}
 	} else {
 		$('#mobile').attr('maxlength','10');
 		$('#mobile').attr('minlength','10');
+        //console.log(count_mob2);
+		console.log(count_mob);
+		if(count_mob==10) {
+		for(i=0;i<10;i++) {
+			var a=$("#mobile").val().substr(i,1);
+			var b=$("#mobile").val().substr(i+1,1);
+			if(a==b) {
+				$("#mobile").val("");
+				count_mob=0;
+				
+			}
+		}
+	}
 	}
 });
 
-$("#pass").bind("keypress", function (e) {
+// $("#pass").bind("keypress", function (e) {
 
 	
-var keyCode = e.which ? e.which : e.keyCode
-if (keyCode==32) {
-	//console.log(keycode);
-	return false;
-}
+// var keyCode = e.which ? e.which : e.keyCode
+// if (keyCode==32) {
+// 	//console.log(keycode);
+// 	return false;
+// }
 
-count_pass+=$("#pass").length;
+// count_pass+=$("#pass").length;
 
-if(count_pass>16) {
-	return false;
-}
-
-
-
-
-
-});
-
-$("#cpass").bind("keypress", function (e) {
-
-	
-var keyCode = e.which ? e.which : e.keyCode
-if (keyCode==32) {
-	//console.log(keycode);
-	return false;
-}
-
-count_cpass+=$("#pass").length;
-
-if(count_cpass>16) {
-	return false;
-}
+// if(count_pass>16) {
+// 	return false;
+// }
 
 
 
 
 
-});
+// });
 
-
-$("#sans").bind("keypress", function (e) {
+// $("#cpass").bind("keypress", function (e) {
 
 	
-var keyCode = e.which ? e.which : e.keyCode
-if (keyCode==32) {
-	//console.log(keycode);
-	return false;
-}
+// var keyCode = e.which ? e.which : e.keyCode
+// if (keyCode==32) {
+// 	//console.log(keycode);
+// 	return false;
+// }
+
+// count_cpass+=$("#pass").length;
+
+// if(count_cpass>16) {
+// 	return false;
+// }
 
 
-});
+
+
+
+// });
+
+
+// $("#sans").bind("keypress", function (e) {
+
+    
+	
+
+	
+// var keyCode = e.which ? e.which : e.keyCode
+// if (!(keyCode>=48 && keyCode<=57) && !(keyCode>=65 && keyCode<=90) && !(keyCode>=97 && keyCode<=122)) {
+// 	//console.log(keycode);
+// 	return false;
+// }
+
+
+// });
 
 
 
