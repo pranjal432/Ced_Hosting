@@ -11,10 +11,13 @@
             $password=md5($password);
             
 
-            $sql1="SELECT * from `tbl_user` WHERE `email`='".$email."' `mobile`=$mobile";
+            $sql1="SELECT * from `tbl_user` WHERE `email`='".$email."' AND `mobile`='".$mobile."'";
+            
 
             $result=$connn->con->query($sql1);
 
+            
+            
 
             
 
@@ -35,7 +38,7 @@
                 
                 if ($connn->con->query($sql)==true) {
                     echo "New record created successfully";
-                    echo "<script>window.location='verification.php';</script>";
+                    // echo "<script>window.location='verification.php';</script>";
                     $_SESSION['useremail']=$email;
                 } else {
                     $errors[]=array("input"=>"form","msg"=>"New record not created.");
@@ -70,7 +73,9 @@
                     } elseif ($row['is_admin']==1 && $row['active']==1) {
                         $_SESSION['admindata']=array("adminname"=>$row['name'],
                         "admin_id"=>$row['id']);
-                        echo "<script>window.location='index.php';</script>";
+                        echo "<script>window.location='admin/index.php';</script>";
+                    } else {
+                        echo "<script>alert('invalid email/password!!');</script>";
                     }
             
                 }

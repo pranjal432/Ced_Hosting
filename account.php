@@ -4,6 +4,11 @@ session_start();
 require "header.php";
 require "User.php";
 require "Config.php";
+$connn=new Dbcon();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 
 
 ?>
@@ -102,7 +107,34 @@ require "Config.php";
 		if($password==$confirmpassword) {
 			$connn=new Dbcon();
 		    $signup=new User();
-		    $signup->signup($connn,$name,$email,$mobile,$password,$securityquestion,$securityanswer);
+			$signup->signup($connn,$name,$email,$mobile,$password,$securityquestion,$securityanswer);
+			$otp = rand(1000,9999);
+			$_SESSION['otp']=$otp;
+			$mail = new PHPMailer();
+			try {
+			$mail->isSMTP(true);
+			$mail->Host = 'smtp.gmail.com';
+			$mail->SMTPAuth = true;
+			$mail->Username = 'princeshukla4321@gmail.com';
+			$mail->Password = 'w.h.o.c.a.r.e.s.d.a.m.o.n';
+			$mail->SMTPSecure = 'tls';
+			$mail->Port = 587;
+
+			$mail->setfrom('princeshukla4321@gmail.com', 'CedHosting');
+			$mail->addAddress($email);
+			$mail->addAddress($email, $name);
+
+			$mail->isHTML(true);
+			$mail->Subject = 'Account Verification';
+			$mail->Body = 'Hi User,Here is your otp for account verification-'.$otp;
+			$mail->AltBody = 'Body in plain text for non-HTML mail clients';
+			$mail->send();
+			header('Location: verificationbyemail.php?email=' . $email);
+			}
+			catch (Exception $e)
+			{
+			echo "Mailer Error: " . $mail->ErrorInfo;
+			}
 
 		} else {
 			echo "<script>alert('password mis-match!!');</script>";
