@@ -7,6 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <?php
 
+session_start();
 require "header.php";
 
 ?>

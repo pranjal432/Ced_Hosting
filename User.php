@@ -1,6 +1,9 @@
 <?php
 
-    
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 
     class User {
 
@@ -17,11 +20,6 @@
             $result=$connn->con->query($sql1);
 
             
-            
-
-            
-
-
             if ($result->num_rows > 0) {
                 $errors[]=array("input"=>"form","msg"=>"Username already present");
                 echo "error";
@@ -29,7 +27,7 @@
             }
             if (count($errors)==0) {
 
-                echo "hello";
+                
                 
 
                 setcookie("username", $email, time() + (60*60*24), "/");
@@ -92,6 +90,112 @@
             $connn->con->close();
         
         
+        }
+
+        function sendEmail($connn, $email, $name, $mobile) {
+
+            $otp = rand(1000, 9999);
+            $_SESSION['otp']=$otp;
+            $mail = new PHPMailer();
+            try {
+                $mail->isSMTP(true);
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'princeshukla4321@gmail.com';
+                $mail->Password = 'Password123$@';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+
+                $mail->setfrom('princeshukla4321@gmail.com', 'CedHosting');
+                $mail->addAddress($email);
+                $mail->addAddress($email, $name);
+
+                $mail->isHTML(true);
+                $mail->Subject = 'Account Verification';
+                $mail->Body = 'Hi User,Here is your otp for account verification-'.$otp;
+                $mail->AltBody = 'Body in plain text for non-HTML mail clients';
+                $mail->send();
+                echo '<script>window.location="verificationbyemail.php?email='.$email.'";</script>';
+            }
+            catch (Exception $e) {
+                    echo "Mailer Error: " . $mail->ErrorInfo;
+            }
+        }
+
+        function sendMobile($connn, $email, $name, $mobile) {
+
+            $otp1 = rand(1000, 9999);
+            $_SESSION['otp1']=$otp1;
+
+            $fields = array(
+                "sender_id" => "FSTSMS",
+                "message" => "This is Test message from Pranjal Shukla ".$name." OTP is :".$otp1,
+                "language" => "english",
+                "route" => "p",
+                "numbers" => $mobile,
+            );
+            
+            $curl = curl_init();
+            
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://www.fast2sms.com/dev/bulk",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_SSL_VERIFYHOST => 0,
+              CURLOPT_SSL_VERIFYPEER => 0,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "POST",
+              CURLOPT_POSTFIELDS => json_encode($fields),
+              CURLOPT_HTTPHEADER => array(
+                "authorization: 2XA04wai3uNM7fYTlbHvFdG165mtLOjrxgZEIJRBzkyPWoscSprBcqPHjZysFTCuX8w5YRQl2gWU0VLI",
+                "accept: */*",
+                "cache-control: no-cache",
+                "content-type: application/json"
+              ),
+            ));
+            
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            
+            curl_close($curl);
+            
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              echo $response;
+              echo '<script>window.location="verificationbyphone.php?mobile='.$mobile.'";</script>';
+            }
+
+        }
+
+        function verifyEmail($connn,$email) {
+
+            $sql="UPDATE tbl_user SET `email_approved`=1 , `active`=1 WHERE `email`='".$email."'";
+            if($connn->con->query($sql)==true) {
+
+               unset($_SESSION['email']);
+               unset($_SESSION['name']);
+               unset($_SESSION['mobile']);
+
+            }
+
+        }
+
+        function verifyMobile($connn,$mobile) {
+
+            $sql="UPDATE tbl_user SET `phone_approved`=1 , `active`=1 WHERE `mobile`='".$mobile."'";
+            if($connn->con->query($sql)==true) {
+
+                unset($_SESSION['email']);
+                unset($_SESSION['name']);
+                unset($_SESSION['mobile']);
+
+            }
+
+
+
         }
 
 

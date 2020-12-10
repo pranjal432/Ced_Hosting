@@ -13,6 +13,10 @@ require "header.php";
 require "Config.php";
 require "User.php";
 
+if(isset($_SESSION['userdata'])) {
+	echo '<script>window.location="index.php";</script>';
+}
+
 
 ?>
 		<!---login--->

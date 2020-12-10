@@ -1,41 +1,92 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
-require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
-
-// //PHPMailer Object
-// $mail = new PHPMailer(); //Argument true in constructor enables exceptions
-
-// //From email address and name
-// $mail->From = "from@yourdomain.com";
-// $mail->FromName = "Full Name";
-
-// //To address and name
-// $mail->addAddress("recepient1@example.com", "Recepient Name");
-// $mail->addAddress("recepient1@example.com"); //Recipient name is optional
-
-// //Address to which recipient will reply
-// $mail->addReplyTo("reply@yourdomain.com", "Reply");
-
-// //CC and BCC
-// $mail->addCC("cc@example.com");
-// $mail->addBCC("bcc@example.com");
-
-// //Send HTML or Plain Text email
-// $mail->isHTML(true);
-
-// $mail->Subject = "Subject Text";
-// $mail->Body = "<i>Mail body in HTML</i>";
-// $mail->AltBody = "This is the plain text version of the email content";
-
-// try {
-//     $mail->send();
-//     echo "Message has been sent successfully";
-// } catch (Exception $e) {
-//     echo "Mailer Error: " . $mail->ErrorInfo;
-// }
+session_start();
+require "header.php";
+require "Config.php";
+require "User.php";
+$connn=new Dbcon();
 
 
+if(isset($_SESSION['email']) && isset($_SESSION['name']) && isset($_SESSION['mobile'])) {
+    $email=$_SESSION['email'];
+    $name=$_SESSION['name'];
+    $mobile=$_SESSION['mobile'];
+} else if(!(isset($_SESSION['email'])) && !(isset($_SESSION['name'])) && !(isset($_SESSION['mobile']))) {
+    echo '<script>window.location="index.php";</script>';
+}
+?>
+
+
+
+
+
+
+<div style="margin:190px;margin-left:210px;text-align:center;">
+<label><u>OTP sent to your Email id </u>: <span><i><?php echo $email; ?></i></span><br><br>
+<form method="POST">
+<input type="text" name="getotp" placeholder="Enter OTP here"><br><br>
+<input type="submit" name="vemail" id="email" class="a" value="Verify" >
+<input type="submit" name="resende" id="resnde" class="btn-success a" value="Resend" >
+
+</form>
+</div>
+
+
+<?php
+
+    if(isset($_POST['vemail'])) {
+        $getotp=$_POST['getotp'];
+        if(isset($_SESSION['otp'])) {
+            $otp=$_SESSION['otp'];
+            if($otp==$getotp) {
+
+                
+                $vp=new User();
+                $vp->verifyEmail($connn, $email);
+                echo '<script>alert("otp matched");</script>';
+                echo '<script>window.location="login.php";</script>';
+
+
+            } else {
+                echo '<script>alert("otp mis-matched");
+                
+                </script>';
+
+            }
+
+                
+
+        }
+    }
+
+    if(isset($_POST['resende'])) {
+        if(isset($_SESSION['email']) && isset($_SESSION['name']) && isset($_SESSION['mobile'])) {
+            $email=$_SESSION['email'];
+            $name=$_SESSION['name'];
+            $mobile=$_SESSION['mobile'];
+
+            $sendmail=new User();
+            $sendmail->sendEmail($connn, $email, $name, $mobile);
+            
+        } else {
+            echo '<script>alert("Session Destroyed, Cant verify now!! First you have to Register yourself as a new user.");</script>';
+        }
+    }
+
+
+?>
+
+<script>
+
+    $("#resnde").hide();
+
+    setTimeout(function(){ $("#resnde").show(); }, 11000);
+
+
+</script>
+
+<?php
+
+    require "footer.php";
 
 ?>

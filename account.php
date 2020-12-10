@@ -5,10 +5,7 @@ require "header.php";
 require "User.php";
 require "Config.php";
 $connn=new Dbcon();
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
-require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 
 
 ?>
@@ -18,7 +15,10 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 	<div class="main-1">
 		<div class="container">
 			<div class="register">
-			<center><strong>Note :</strong><span> * means required</span></center>
+			<center><div class="register-top-grid">
+					<h3 style="font-size:35px;"><u>Sign Up</u> </h3>
+			</div></center>
+			<center><strong><u>Note :</u></strong><span> * means required</span></center>
 		  	  <form method="POST" onsubmit="return validate()" style="margin-top:10px;"> 
 				
 				 <div class="register-top-grid">
@@ -54,6 +54,7 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 								<span>Confirm Password<label>*</label></span>
 								<input type="password" id="cpass" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" name="confirmpassword" maxlength="16" minlength="8" required>
 							 </div>
+							 
 							 <div>
 								<span>Add a security question:<label>*</label></span>
 								<select name="securityquestion" id="squestion" style="width:524px;height:37px" required>
@@ -101,6 +102,9 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 		$confirmpassword=$_POST['confirmpassword'];
 		$securityquestion=isset($_POST['securityquestion'])?$_POST['securityquestion']:'';
 		$securityanswer=isset($_POST['securityanswer'])?$_POST['securityanswer']:'';
+		$_SESSION['email']=$email;
+		$_SESSION['name']=$name;
+		$_SESSION['mobile']=$mobile;
 
 		
 
@@ -108,33 +112,8 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 			$connn=new Dbcon();
 		    $signup=new User();
 			$signup->signup($connn,$name,$email,$mobile,$password,$securityquestion,$securityanswer);
-			$otp = rand(1000,9999);
-			$_SESSION['otp']=$otp;
-			$mail = new PHPMailer();
-			try {
-			$mail->isSMTP(true);
-			$mail->Host = 'smtp.gmail.com';
-			$mail->SMTPAuth = true;
-			$mail->Username = 'princeshukla4321@gmail.com';
-			$mail->Password = 'w.h.o.c.a.r.e.s.d.a.m.o.n';
-			$mail->SMTPSecure = 'tls';
-			$mail->Port = 587;
-
-			$mail->setfrom('princeshukla4321@gmail.com', 'CedHosting');
-			$mail->addAddress($email);
-			$mail->addAddress($email, $name);
-
-			$mail->isHTML(true);
-			$mail->Subject = 'Account Verification';
-			$mail->Body = 'Hi User,Here is your otp for account verification-'.$otp;
-			$mail->AltBody = 'Body in plain text for non-HTML mail clients';
-			$mail->send();
-			header('Location: verificationbyemail.php?email=' . $email);
-			}
-			catch (Exception $e)
-			{
-			echo "Mailer Error: " . $mail->ErrorInfo;
-			}
+			echo '<script>window.location="verification.php";</script>';
+			
 
 		} else {
 			echo "<script>alert('password mis-match!!');</script>";
@@ -159,6 +138,7 @@ var count_pass=0;
 var count_cpass=0;
 //var mobile_no='';
 var c=0;
+var v=0;
 
 
 function validate() {
@@ -213,35 +193,7 @@ $("#mobile").bind("keypress", function (e) {
 	
 });
 
-// $("#mobile").bind("paste", function(e){
 
-// 	e.preventDefault();
-    
-// 	// var pastedData = e.originalEvent.clipboardData.getData('text/plain');
-	
-// 	// if(pastedData.length==10) {
-
-// 	// 	for(i=0;i<10;i++) {
-// 	// 		// var a=$("#mobile").val().substr(i,1);
-// 	// 		// var b=$("#mobile").val().substr(i+1,1);
-// 	// 		// if(a==b) {
-// 	// 		// 	$("#mobile").val("");
-// 	// 		// }
-// 	// 		//console.log(pastedData[i]);
-// 	// 		var d=pastedData[i];
-// 	// 		var e=pastedData[i+1];
-			
-			
-
-// 	// 		if(d==e) {
-				
-				
-// 	// 		}
-
-// 	// 	}
-
-// 	// }
-// });
 
 $('#mobile').on("cut copy paste drag drop",function(e) {
     e.preventDefault();
@@ -263,9 +215,15 @@ $("#mobile").bind("keyup", function (e) {
 				var a=$("#mobile").val().substr(i,1);
 				var b=$("#mobile").val().substr(i+1,1);
 				if(a==b) {
-					$("#mobile").val("");
-					count_mob=0;
+					v++;
+					
 				}
+				if(v==10) {
+				$("#mobile").val("");
+				count_mob=0;
+				v=0;
+
+			    }
 			}
 	    }
 		if(schar==0)
@@ -290,9 +248,15 @@ $("#mobile").bind("keyup", function (e) {
 			var a=$("#mobile").val().substr(i,1);
 			var b=$("#mobile").val().substr(i+1,1);
 			if(a==b) {
+				v++;
+				
+				
+			}
+			if(v==9) {
 				$("#mobile").val("");
 				count_mob=0;
-				
+				v=0;
+
 			}
 		}
 	}
