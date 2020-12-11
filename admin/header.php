@@ -35,6 +35,7 @@ if (isset($_SESSION['admindata'])) {
   <link rel="icon" href="assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
   <!-- Icons -->
   <link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
@@ -77,7 +78,7 @@ if (isset($_SESSION['admindata'])) {
                             </a>
                         </ul>
                         <ul class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="addproduct.php">
                                 <i class="ni ni-single-02 text-yellow"></i>
                                 <span class="nav-link-text">Add Product</span>
                             </a>

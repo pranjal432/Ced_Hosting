@@ -9,6 +9,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 session_start();
 require "header.php";
+if(isset($_SESSION['admindata'])) {
+	echo '<script>window.location="admin/index.php";</script>';
+}
 
 ?>
 	<!---banner--->
