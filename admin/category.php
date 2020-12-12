@@ -112,7 +112,7 @@
         <div class="col">
           <div class="card ">
           <div class="card-header border-0">
-              <h3 class="mb-0">Product table</h3>
+              <h3 class="mb-0">Sub-category table</h3>
             </div>
             <div class="table-responsive">
             <table class="table align-items-center table-flush" id="myTable">
@@ -240,7 +240,7 @@
 
                         <div class="md-form mb-4">
                           <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['prod_name']; ?>" name="prodname">
-                          <label data-error="wrong" data-success="right" for="defaultForm-pass">Product Name</label>
+                          <label data-error="wrong" data-success="right" for="defaultForm-pass">Sub-category Name</label>
                         </div>
 
                         <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['id']; ?>" name="idfield" hidden>

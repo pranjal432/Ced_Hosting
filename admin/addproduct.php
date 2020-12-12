@@ -36,7 +36,7 @@
     <!-- Page content -->
     <div class="col-xl-12 order-xl-1">
             <div class="card-body">
-              <form>
+              <form method="POST">
                 <h6 class="heading-small text-muted mb-4">Enter Product Details</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -143,7 +143,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Language / Technology Support</label>
-                        <input type="text" id="input-first-name" class="form-control" name="ltsupport" placeholder="Free Domain">
+                        <input type="text" id="input-first-name" class="form-control" name="ltsupport" placeholder="Language / Technology Support">
                         <h6 class="heading-small text-muted mb-4">Separate by (,) Ex: PHP, MySQL, MongoDB</h6>
                       </div>
                     </div>
@@ -152,7 +152,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Mailbox</label>
-                        <input type="text" id="input-first-name" class="form-control" name="mailbox" placeholder="Free Domain">
+                        <input type="text" id="input-first-name" class="form-control" name="mailbox" placeholder="Mailbox">
                         <h6 class="heading-small text-muted mb-4">Enter Number of mailbox will be provided, enter 0 if none</h6>
                       </div>
                     </div>
@@ -161,8 +161,9 @@
                       <input type="submit" value="Add Product" name="addproduct" class="btn btn-primary">
                     </div>
                 </div>
-              </form>
+              
             </div>
+            </form>
 
           </div>
         </div>
@@ -187,6 +188,7 @@
         $addproduct=new Product();
         $addproduct-> addProduct($connn, $selectcategory, $productname, $pageurl, $monthlyprice, $annualprice, $sku,
         $webspace, $bandwidth, $freedomain, $ltsupport, $mailbox );
+        //echo '<script>alert("heelllooo");</script>';
 
     }
 

@@ -3,7 +3,7 @@
 session_start();
 require "header.php";
 require "User.php";
-require "Config.php";
+//require "Config.php";
 $connn=new Dbcon();
 
 

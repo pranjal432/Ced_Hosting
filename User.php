@@ -178,6 +178,7 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
                unset($_SESSION['email']);
                unset($_SESSION['name']);
                unset($_SESSION['mobile']);
+               unset($_SESSION['otp']);
 
             }
 
@@ -191,6 +192,7 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
                 unset($_SESSION['email']);
                 unset($_SESSION['name']);
                 unset($_SESSION['mobile']);
+                unset($_SESSION['otp1']);
 
             }
 

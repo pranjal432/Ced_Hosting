@@ -1,5 +1,9 @@
 <?php
 
+   require "admin/Product.php";
+   require "Config.php";
+   $connn=new Dbcon();
+
 	$filename=basename($_SERVER['REQUEST_URI']);
 	$file=explode('?',$filename);
 	//echo $filename;
@@ -90,10 +94,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							
 								
 								<ul class="dropdown-menu">
-									<li class="<?php if($file[0]=="linuxhosting.php"):?>active<?php  endif; ?>"><a href="linuxhosting.php">Linux hosting</a></li>
-									<li class="<?php if($file[0]=="wordpresshosting.php"):?>active<?php  endif; ?>"><a href="wordpresshosting.php">WordPress Hosting</a></li>
-									<li class="<?php if($file[0]=="windowshosting.php"):?>active<?php  endif; ?>"><a href="windowshosting.php">Windows Hosting</a></li>
-									<li class="<?php if($file[0]=="cmshosting.php"):?>active<?php  endif; ?>"><a href="cmshosting.php">CMS Hosting</a></li>
+
+								<?php
+
+									$add=new Product();
+									$add1=$add->productList($connn);
+
+									foreach($add1 as $key=>$row) {
+
+										if($row['id']==1) {
+											continue;
+										}
+
+										echo '<li class="';
+										if( $file[0]==$row['prod_name'].".php" ):
+											echo 'active';
+										endif;
+										echo '"><a href="'.$row['prod_name'].'.php">'.$row['prod_name'].'</a></li>';
+									}
+
+
+
+								?>
+									<!--  -->
 								</ul>			
 						    </li>
 								

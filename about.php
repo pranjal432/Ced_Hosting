@@ -8,9 +8,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
     session_start();
 	require "header.php";
-	if(isset($_SESSION['userdata'])) {
-		echo '<script>window.location="index.php";</script>';
-	}
+	
 
 ?>
 		<!--about--->

@@ -93,7 +93,130 @@
         function addProduct($connn, $selectcategory, $productname, $pageurl, $monthlyprice, $annualprice, $sku,
         $webspace, $bandwidth, $freedomain, $ltsupport, $mailbox ) {
 
-            // $sql="INSERT INTO tbl_product () VALUES ";
+            date_default_timezone_set("Asia/Calcutta");
+            $dat=date("Y-m-d h:i:s");
+
+            $sql="INSERT INTO tbl_product (`prod_parent_id`,`prod_name`,`prod_available`,`prod_launch_date`,`link`)
+             VALUES('".$selectcategory."','".$productname."',1,'".$dat."','".$pageurl."')";
+
+            if($connn->con->query($sql)==true) {
+                $lastindex=$connn->con->insert_id;
+                
+            }
+            
+
+            $arr=array("webspace"=>$webspace,"bandwidth"=>$bandwidth,"freedomain"=>$freedomain,
+          "ltsupport"=>$ltsupport,"mailbox"=>$mailbox);
+
+           $js=json_encode($arr);
+           //echo '<script>alert("'.$js.'");</script>';
+
+           $sql="INSERT INTO tbl_product_description (`prod_id`,`description`,`mon_price`,`annual_price`,`sku`)
+            VALUES('".$lastindex."','".$js."','".$monthlyprice."','".$annualprice."','".$sku."')";
+
+            if($connn->con->query($sql)==true) {
+                echo '<script>window.location="viewproduct.php";</script>';
+                 
+            }
+        }
+
+        function createProductTable($connn) {
+
+            $arr=array();
+            $sql="SELECT * from tbl_product INNER JOIN tbl_product_description ON tbl_product.id=tbl_product_description.prod_id";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                   
+                    array_push($arr, $row);
+
+                }
+                return $arr;
+            }
+
+        }
+
+        function fetchParentName($connn, $pid) {
+            $sql="SELECT * from tbl_product WHERE `id`='".$pid."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    echo $row['prod_name'];
+                }
+            }
+        }
+
+        function fetchParentProductId($connn, $ppid) {
+
+            $sql="SELECT * from tbl_product WHERE `id`='".$ppid."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    return $row['prod_parent_id'];
+                }
+            }
+        }
+
+        function viewProductsList($connn, $pi1) {
+            $arr=array();
+            $sql="SELECT * from tbl_product WHERE `prod_parent_id`='".$pi1."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    array_push($arr, $row);
+                }
+                return $arr;
+            }
+
+        }
+
+        function editProduct($connn, $selectcat, $idfield, $prodname, $prodlink, $avail, $mprice,
+        $aprice, $esku, $webspace, $bandwidth, $freedomain, $ltsupport, $mailbox ) {
+
+            $sql="UPDATE tbl_product SET `prod_parent_id`='".$selectcat."' , `prod_name`='".$prodname."' , 
+            `prod_available`='".$avail."' , `link`='".$prodlink."' WHERE `id`='".$idfield."'";
+            if($connn->con->query($sql)==true) {
+                
+            }
+
+            $arr=array("webspace"=>$webspace,"bandwidth"=>$bandwidth,"freedomain"=>$freedomain,
+            "ltsupport"=>$ltsupport,"mailbox"=>$mailbox);
+
+            $js=json_encode($arr);
+
+            $sql1="UPDATE tbl_product_description SET `description`='".$js."' , `mon_price`='".$mprice."' , 
+            `annual_price`='".$aprice."' , `sku`='".$esku."' WHERE `prod_id`='".$idfield."'";
+            if($connn->con->query($sql1)==true) {
+
+                echo '<script>alert("Product Updated!!");
+                window.location="viewproduct.php";
+                </script>';
+                
+            }
+        }
+
+        function deleteProduct($connn, $deleteidfield) {
+
+            $sql="DELETE from tbl_product WHERE `id`='".$deleteidfield."'";
+        
+            if($connn->con->query($sql)==true) {
+                
+            }
+
+            
+
+            $sql1="DELETE from tbl_product_description WHERE `prod_id`='".$deleteidfield."'";
+        
+            if($connn->con->query($sql1)==true) {
+                echo '<script>
+                alert("Product Deleted!!");
+                window.location="viewproduct.php";
+                </script>';
+                return true;
+            }
+            
+
+
         }
     }
 
@@ -102,56 +225,3 @@
 
 
 
-<?php
-// echo '<tr>
-// <th scope="row">
-//   <div class="media align-items-center">
-//     <a href="#" class="avatar rounded-circle mr-3">
-//       <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
-//     </a>
-//     <div class="media-body">
-//       <span class="name mb-0 text-sm">'.$row['id'].'</span>
-//     </div>
-//   </div>
-// </th>
-// <td class="budget">
-//   '.$row['prod_parent_id'].'
-// </td>
-// <td>
-//   <span class="badge badge-dot mr-4">
-//     <i class="bg-warning"></i>
-//     <span class="status">'.$row['prod_name'].'</span>
-//   </span>
-// </td>
-// <td>
-//   <div class="avatar-group">
-//     <a href="'.$row['link'].'" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ryan Tompson">
-      
-//     </a>
-    
-//   </div>
-// </td>
-// <td>
-//   <div class="d-flex align-items-center">
-//     <span class="completion mr-2">'.$row['prod_available'].'</span>
-//   </div>
-// </td>
-// <td>
-//   <div class="d-flex align-items-center">
-//     <span class="completion mr-2">'.$row['prod_available'].'</span>
-//   </div>
-// </td>
-// <td class="text-right">
-//   <div class="dropdown">
-//     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-//       <i class="fas fa-ellipsis-v"></i>
-//     </a>
-//     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-//       <a class="dropdown-item" href="#">Action</a>
-//       <a class="dropdown-item" href="#">Another action</a>
-//       <a class="dropdown-item" href="#">Something else here</a>
-//     </div>
-//   </div>
-// </td>
-// </tr>';
-?>

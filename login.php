@@ -10,7 +10,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 session_start();
 require "header.php";
-require "Config.php";
+//require "Config.php";
 require "User.php";
 
 if(isset($_SESSION['userdata'])) {
