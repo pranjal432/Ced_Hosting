@@ -44,7 +44,7 @@
                       <div class="form-group">
                         <label class="form-control-label" for="input-username">Select Product Category</label>
                         <!-- <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse"> -->
-                        <select name="selectcategory" id="" class="form-control">
+                        <select name="selectcategory" id="" class="form-control" required>
                         <option value="" selected disabled hidden>--Select Category--</option>
                         <?php
 
@@ -77,7 +77,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Enter Product Name</label>
-                        <input type="text" id="input-email" name="productname" class="form-control" placeholder="Enter Product Name">
+                        <input type="text" id="input-email" name="productname" class="form-control" placeholder="Enter Product Name" pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" required>
                       </div>
                     </div>
                   </div>
@@ -85,7 +85,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Page URL</label>
-                        <input type="text" id="input-first-name" name="pageurl" class="form-control" placeholder="Page URL">
+                        <input type="text" id="input-first-name" name="pageurl" class="form-control" placeholder="Page URL" required>
                       </div>
                     </div>
                   </div>

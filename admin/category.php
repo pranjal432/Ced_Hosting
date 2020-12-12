@@ -50,7 +50,7 @@
                       <span class="input-group-text"></span>
                     </div>
                     <select class="form-control" name="selectcategory" required>
-                    <option selected disabled hidden>Please Select Parent Category</option>
+                    <option value="" selected disabled hidden>--Please Select Parent Category--</option>
 
                     <?php
                       $cat=new Product();
@@ -80,7 +80,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"></span>
                     </div>
-                    <input class="form-control" name="subcategory" 
+                    <input class="form-control" pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" name="subcategory" 
                     placeholder="Please Enter Sub-Category Name" type="text" required>
                   </div>
                 </div>
