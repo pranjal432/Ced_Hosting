@@ -56,8 +56,13 @@
                               if($row['id']==1) {
                                 continue;
                               }
+                              if($row['prod_parent_id']==1) {
 
-                              echo '<option value="'.$row['id'].'">'.$row['prod_name'].'</option>';
+                                echo '<option value="'.$row['id'].'">'.$row['prod_name'].'</option>';
+
+                              }
+
+                              
 
 
 

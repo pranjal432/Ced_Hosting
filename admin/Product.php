@@ -115,7 +115,9 @@
             VALUES('".$lastindex."','".$js."','".$monthlyprice."','".$annualprice."','".$sku."')";
 
             if($connn->con->query($sql)==true) {
-                echo '<script>window.location="viewproduct.php";</script>';
+                echo '<script>
+                alert("Product added successfully!!");
+                window.location="viewproduct.php";</script>';
                  
             }
         }
@@ -142,6 +144,16 @@
             if($result->num_rows >0) {
                 while($row=$result->fetch_assoc()) {
                     echo $row['prod_name'];
+                }
+            }
+        }
+
+        function fetchParentNameSecond($connn, $pid) {
+            $sql="SELECT * from tbl_product WHERE `id`='".$pid."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    return $row['prod_name'];
                 }
             }
         }

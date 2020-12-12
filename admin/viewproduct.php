@@ -45,7 +45,7 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col" class="sort" data-sort="name">Product Name</th>
-                    <th scope="col" class="sort" data-sort="name">Prod Parent Name</th>
+                    <th scope="col" class="sort" data-sort="name">Product Category</th>
                     <th scope="col" class="sort" data-sort="budget">Availability</th>
                     <th scope="col" class="sort" data-sort="status">Launch Date</th>
                     <th scope="col">Link</th>
@@ -195,9 +195,9 @@
                               foreach($vproductlist1 as $key3=>$row3) {
                                 $pid1=$row['prod_parent_id'];
                                 $pn2=new Product();
-                                $pn2->fetchParentName($connn, $pid1);
+                                $pn3=$pn2->fetchParentNameSecond($connn, $pid1);
 
-                                if($row3['prod_name']!=$pn2) {
+                                if($row3['prod_name']!=$pn3) {
                                 
                             ?>
 
