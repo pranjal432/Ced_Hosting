@@ -48,7 +48,7 @@
                     <th scope="col" class="sort" data-sort="name">Product Category</th>
                     <th scope="col" class="sort" data-sort="budget">Availability</th>
                     <th scope="col" class="sort" data-sort="status">Launch Date</th>
-                    <th scope="col">Link</th>
+                    <th scope="col">html</th>
                     <th scope="col">websapace</th>
                     <th scope="col">bandwidth</th>
                     <th scope="col">Free domain</th>
@@ -107,7 +107,7 @@
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
-                        <span class="completion mr-2"><?php  echo $row['link']; ?></span>
+                        <span class="completion mr-2"><?php  echo $row['html']; ?></span>
                         
                       </div>
                     </td>
@@ -221,8 +221,8 @@
                         <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['prod_id']; ?>" name="idfield" hidden>
 
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['link']; ?>" name="prodlink">
-                          <label data-error="wrong" data-success="right" for="defaultForm-pass">Link</label>
+                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['html']; ?>" name="prodlink">
+                          <label data-error="wrong" data-success="right" for="defaultForm-pass">html</label>
                         </div>
 
                         <div class="md-form mb-4">
@@ -335,157 +335,7 @@
 
 ?>
 
-<script>
 
-$(document).ready(function(){
-
-$("#prodCategory").hide();
-$("#prodname").hide();
-$("#produrl").hide();
-$("#prodprice").hide();
-$("#prodallprice").hide();
-$("#prodsku").hide();
-$("#prodweb").hide();
-$("#prodband").hide();
-$("#prodfree").hide();
-$("#prodlang").hide();
-$("#prodmail").hide();
-$("#submit10").hide();
-
-// $("#proname").value();
-
-$("#select").focusout(function() {
-$categoryid = $("#select").val();
-if ($categoryid == "") {
-    $("#prodCategory").html("*Select Category");
-    $("#prodCategory").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red');
-} else {
-    $("#submit10").show();
-    $("#prodCategory").hide();
-    $(this).css('border', 'solid 3px green');
-}
-});
-
-$("#proname").focusout(function() {
-$proname = $("#proname").val();
-if ($proname == "") {
-    $("#prodname").html("*Select Product Name");
-    $("#prodname").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red');
-}  
-else if(!$proname.match(/^[a-zA-Z_]+( [a-zA-Z_]+)*$/))
-{
-    $("#prodname").html("*Select Valid Product Name");
-    $("#prodname").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red'); 
-}
-
-else {
-    $("#submit10").show();
-    $("#prodname").hide();
-    $(this).css('border', 'solid 3px green');
-}
-
-
-
-});
-
-$("#proprice").focusout(function() {
-$proprice = $("#proprice").val();
-
-
-if ($proprice == "") {
-    $("#prodprice").html("*Select Product price");
-    $("#prodprice").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red');
-}  
-else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
-{
-    $("#prodprice").html("*Select Valid Product price");
-    $("#prodprice").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red'); 
-}
-
-
-else {
-    $("#submit10").show();
-    $("#prodprice").hide();
-    $(this).css('border', 'solid 3px green');
-}
-
-
-
-});
-
-
-$("#proannualprice").focusout(function() {
-$proprice = $("#proannualprice").val();
-if ($proprice == "") {
-    $("#prodallprice").html("*Select Product Annual price");
-    $("#prodallprice").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red');
-}  
-else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
-{
-    $("#prodallprice").html("*Select Valid Product Annual price");
-    $("#prodallprice").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red'); 
-}
-
-else {
-    $("#submit10").show();
-    $("#prodallprice").hide();
-    $(this).css('border', 'solid 3px green');
-}
-
-
-
-});
-
-
-$("#proweb").focusout(function() {
-$proprice = $("#proweb").val();
-if ($proprice == "") {
-    $("#prodweb").html("*Select Web Space in G.B");
-    $("#prodweb").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red');
-}  
-else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
-{
-    $("#prodweb").html("*Select Valid Web Space price");
-    $("#prodweb").show();
-    $("#submit10").hide();
-    $(this).css('border', 'solid 3px red'); 
-}
-
-
-
-else {
-    $("#submit10").show();
-    $("#prodweb").hide();
-    $(this).css('border', 'solid 3px green');
-}
-
-
-
-});
-
-
-
-
-
-});
-
-</script>
 
 <?php
 

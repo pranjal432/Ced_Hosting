@@ -38,23 +38,36 @@
             //echo '<script>alert("helloooooooooo");</script>';
             date_default_timezone_set("Asia/Calcutta");
             $dat=date("Y-m-d h:i:s");
+            strtolower($subcategory);
 
-            $sql="INSERT INTO tbl_product (`prod_parent_id`,`prod_name`,`link`,`prod_available`,`prod_launch_date`)
-            VALUES ('".$selectedcategory."',
-            '".$subcategory."','".$link."',1,'".$dat."')";
-            if($connn->con->query($sql)==true) {
-                echo '<script>alert("Category added successfully!!");
+            $sql="SELECT * from tbl_product WHERE `prod_name`='".$subcategory."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                echo '<script>alert("Category already present!!");
                 window.location="category.php";
                 </script>';
+            } else {
+
+                $sql1="INSERT INTO tbl_product (`prod_parent_id`,`prod_name`,`html`,`prod_available`,`prod_launch_date`)
+                VALUES ('".$selectedcategory."',
+                '".$subcategory."','".$link."',1,'".$dat."')";
+                if($connn->con->query($sql1)==true) {
+                    echo '<script>alert("Category added successfully!!");
+                    window.location="category.php";
+                    </script>';
+
+                }
 
             }
+
+            
 
         }
 
         function editSubCategory($connn, $avail, $prodname, $prodlink, $idfield) {
 
             $sql="UPDATE tbl_product SET `prod_available`='".$avail."' , `prod_name`='".$prodname."' , 
-            `link`='".$prodlink."' WHERE `id`='".$idfield."'";
+            `html`='".$prodlink."' WHERE `id`='".$idfield."'";
             if($connn->con->query($sql)==true) {
                 echo '<script>
                 alert("Sub-Category Updated!!");
@@ -96,13 +109,17 @@
             date_default_timezone_set("Asia/Calcutta");
             $dat=date("Y-m-d h:i:s");
 
-            $sql="INSERT INTO tbl_product (`prod_parent_id`,`prod_name`,`prod_available`,`prod_launch_date`,`link`)
+            $sql="INSERT INTO tbl_product (`prod_parent_id`,`prod_name`,`prod_available`,`prod_launch_date`,`html`)
              VALUES('".$selectcategory."','".$productname."',1,'".$dat."','".$pageurl."')";
 
             if($connn->con->query($sql)==true) {
                 $lastindex=$connn->con->insert_id;
                 
             }
+
+            
+
+
             
 
             $arr=array("webspace"=>$webspace,"bandwidth"=>$bandwidth,"freedomain"=>$freedomain,
@@ -186,7 +203,7 @@
         $aprice, $esku, $webspace, $bandwidth, $freedomain, $ltsupport, $mailbox ) {
 
             $sql="UPDATE tbl_product SET `prod_parent_id`='".$selectcat."' , `prod_name`='".$prodname."' , 
-            `prod_available`='".$avail."' , `link`='".$prodlink."' WHERE `id`='".$idfield."'";
+            `prod_available`='".$avail."' , `html`='".$prodlink."' WHERE `id`='".$idfield."'";
             if($connn->con->query($sql)==true) {
                 
             }

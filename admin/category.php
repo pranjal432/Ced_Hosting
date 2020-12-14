@@ -49,8 +49,8 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"></span>
                     </div>
-                    <select class="form-control" name="selectcategory" required>
-                    <option value="" selected disabled hidden>--Please Select Parent Category--</option>
+                    <select class="form-control" name="selectcategory" id="selectc" required>
+                    <option value="" hidden>--Please Select Parent Category--</option>
 
                     <?php
                       $cat=new Product();
@@ -70,6 +70,7 @@
                     
                     ?>
                     </select>
+                    <p id="prodCategory"></p>
                   </div>
                 </div>
 
@@ -81,7 +82,8 @@
                       <span class="input-group-text"></span>
                     </div>
                     <input class="form-control" pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" name="subcategory" 
-                    placeholder="Please Enter Sub-Category Name" type="text" required>
+                    placeholder="Please Enter Sub-Category Name" type="text" id="scn" required>
+                    <p id="subname"></p>
                   </div>
                 </div>
                 <div class="form-group">
@@ -96,7 +98,7 @@
                 
                 <div class="text-center">
                   <input type="submit" 
-                  class="btn btn-primary mt-4" name="btnaddsubcategory" value="Add Sub Category">
+                  class="btn btn-primary mt-4" id="add" name="btnaddsubcategory" value="Add Sub Category">
                 </div>
               </form>
             </div>
@@ -123,7 +125,7 @@
                     data-sort="budget">Parent Product Name</th>
                     <th scope="col" class="sort" 
                     data-sort="status">Product Name </th>
-                    <th scope="col">Link</th>
+                    <th scope="col">html</th>
                     <th scope="col">Product Availability</th>
                     <th scope="col" class="sort" 
                     data-sort="completion">Product Launch Date</th>
@@ -172,10 +174,10 @@
                     <td>
 
                     <?php 
-                    if ($row['link']=="") {
+                    if ($row['html']=="") {
                         $link="Null";
                     } else {
-                        $link=$row['link'];
+                        $link=$row['html'];
 
                     }
 
@@ -246,8 +248,8 @@
                         <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['id']; ?>" name="idfield" hidden>
 
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['link']; ?>" name="prodlink">
-                          <label data-error="wrong" data-success="right" for="defaultForm-pass">Link</label>
+                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['html']; ?>" name="prodlink">
+                          <label data-error="wrong" data-success="right" for="defaultForm-pass">html</label>
                         </div>
 
                         <div class="md-form mb-4">
@@ -316,6 +318,7 @@
     }
 
     if(isset($_POST['delete'])) {
+
         $deleteidfield=isset($_POST['deleteidfield'])?$_POST['deleteidfield']:'';
         
         $delete=new Product();
@@ -327,6 +330,79 @@
 ?>
 
 
+</div>
+</div>
+
 <?php
     require "footer.php";
 ?>
+
+<script>
+
+var count1=0;
+var count2=0;
+
+$(document).ready(function() {
+
+  $("#selectc").focusout(function() {
+    $categoryid = $("#selectc").val();
+    if ($categoryid == "") {
+        $("#prodCategory").html("*Select Category");
+        $("#prodCategory").show();
+        $("#add").attr("disabled",true);
+        $(this).css('border', 'solid 3px red');
+        count1=0;
+    } else {
+      
+        count1=1;
+        //$("#add").attr("disabled",false);
+        $("#prodCategory").hide();
+        $(this).css('border', 'solid 3px green');
+    }
+    a();
+  });
+
+$("#scn").focusout(function() {
+$proname = $(this).val();
+if ($proname == "") {
+    $("#subname").html("*Enter Product Name");
+    $("#subname").show();
+    $("#add").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count2=0;
+}
+else if(!$proname.match(/^[a-zA-Z_]+([-/.])*( [a-zA-Z_]+)*(-[0-9]+(?!-)+)*$/))
+{
+    $("#subname").html("*Enter Valid Product Name");
+    $("#subname").show();
+    $("#add").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count2=0;
+}
+//([a-zA-Z_]*[0-9])+([-/.])*( [a-zA-Z_]+)*(-[0-9]+(?!-)+)*$
+
+
+else {
+  
+  count2=1;
+    //$("#add").attr("disabled",false);
+    $("#prodname").hide();
+    $(this).css('border', 'solid 3px green');
+}
+a();
+  });
+
+  function a() {
+    if((count1+count2==2)) {
+
+      $("#add").attr("disabled",false);
+
+    }
+
+  }
+});  
+
+
+
+</script>
+

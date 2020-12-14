@@ -105,12 +105,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										if($row['id']==1) {
 											continue;
 										}
+										if($row['prod_parent_id']==1) {
+											echo '<li class="';
+											if( $file[0]==$row['prod_name'].".php" ):
+												echo 'active';
+											endif;
+											echo '"><a href="'.$row['prod_name'].'.php">'.$row['prod_name'].'</a></li>';
 
-										echo '<li class="';
-										if( $file[0]==$row['prod_name'].".php" ):
-											echo 'active';
-										endif;
-										echo '"><a href="'.$row['prod_name'].'.php">'.$row['prod_name'].'</a></li>';
+										}
+
+										
 									}
 
 
