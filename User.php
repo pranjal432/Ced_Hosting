@@ -200,6 +200,20 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
 
         }
 
+        function catDetails($connn, $id) {
+
+            $arr=array();
+            $sql="SELECT * from tbl_product WHERE `id`='".$id."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    array_push($arr, $row);
+
+                }
+                return $arr;
+            }
+        }
+
 
     }
 

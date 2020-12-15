@@ -89,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<a href="services.php" >Services</a>
 								</li>
 									
-							<li class="dropdown <?php if(in_array($file[0],$hostingmenu)):?>active<?php  endif; ?>">
+							<li class="dropdown <?php if($file[0]=="catpage.php"):?>active<?php  endif; ?>">
 								<a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 							
 								
@@ -107,10 +107,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										}
 										if($row['prod_parent_id']==1) {
 											echo '<li class="';
-											if( $file[0]==$row['prod_name'].".php" ):
+											if($filename == "catpage.php?id=".$row['id']."" ) :
 												echo 'active';
 											endif;
-											echo '"><a href="'.$row['prod_name'].'.php">'.$row['prod_name'].'</a></li>';
+											echo '"><a href="catpage.php?id='.$row['id'].'">'.$row['prod_name'].'</a></li>';
 
 										}
 

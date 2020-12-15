@@ -44,7 +44,7 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-username">Select Product Category</label>
+                        <label class="form-control-label" for="input-username">Select Product Category*</label>
                         <!-- <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse"> -->
                         <select name="selectcategory" id="select" class="form-control">
                         <option value="" hidden>--Select Category--</option>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email">Enter Product Name</label>
+                        <label class="form-control-label" for="input-email">Enter Product Name*</label>
                         <input type="text" name="productname" class="form-control" placeholder="Enter Product Name" id="proname">
                         <p id="prodname"></p>
 
@@ -103,14 +103,14 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-username">Enter Monthly Price</label>
+                        <label class="form-control-label" for="input-username">Enter Monthly Price*</label>
                         <input type="text" class="form-control" maxlength="15" name="monthlyprice" placeholder="ex: 23" id="proprice">
                         <p id="prodprice"></p>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email">Enter Annual Price</label>
+                        <label class="form-control-label" for="input-email">Enter Annual Price*</label>
                         <input type="text" class="form-control" maxlength="15" name="annualprice" placeholder="ex: 23" id="proannualprice">
                         <p id="prodallprice"></p>
                       </div>
@@ -119,7 +119,7 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">SKU</label>
+                        <label class="form-control-label" for="input-first-name">SKU*</label>
                         <input type="text" class="form-control" name="sku" placeholder="SKU" id="prosku">
                         <p id="prodsku"></p>
                       </div>
@@ -133,7 +133,7 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-username">Web Space(in GB)</label>
+                        <label class="form-control-label" for="input-username">Web Space(in GB)*</label>
                         <input type="text" class="form-control" name="webspace" maxlength="5" placeholder="Web Space(in GB)" id="proweb">
                         <h6 class="heading-small text-muted mb-4">Enter 0.5 for 512 MB</h6>
                         <p id="prodweb"></p>
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-email">Bandwidth (in GB)</label>
+                        <label class="form-control-label" for="input-email">Bandwidth (in GB)*</label>
                         <input type="text" class="form-control" name="bandwidth" maxlength="5" placeholder="Bandwidth (in GB)" id="proband">
                         <h6 class="heading-small text-muted mb-4">Enter 0.5 for 512 MB</h6>
                         <p id="prodband"></p>
@@ -151,7 +151,7 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Free Domain</label>
+                        <label class="form-control-label" for="input-first-name">Free Domain*</label>
                         <input type="text" class="form-control" name="freedomain" placeholder="Free Domain" id="profree">
                         <h6 class="heading-small text-muted mb-4">Enter 0 if no domain available in this service</h6>
                         <p id="prodfree"></p>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Language / Technology Support</label>
+                        <label class="form-control-label" for="input-first-name">Language / Technology Support*</label>
                         <input type="text" class="form-control" name="ltsupport" placeholder="Language / Technology Support" id="prolang">
                         <h6 class="heading-small text-muted mb-4">Separate by (,) Ex: PHP, MySQL, MongoDB</h6>
                         <p id="prodlang"></p>
@@ -169,7 +169,7 @@
                   <div class="row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-first-name">Mailbox</label>
+                        <label class="form-control-label" for="input-first-name">Mailbox*</label>
                         <input type="text" class="form-control" name="mailbox" placeholder="Mailbox" id="promail">
                         <h6 class="heading-small text-muted mb-4">Enter Number of mailbox will be provided, enter 0 if none</h6>
                         <p id="prodmail"></p>
@@ -207,17 +207,13 @@
         $monthlyprice=(float)$monthlyprice;
         $annualprice=(float)$annualprice;
 
-        if($monthlyprice>=$annualprice) {
-          echo '<script>alert("monthly price cant be greater than annual price!!");
-          $("#proprice").val("");
-          </script>';
-        } else {
+        
 
-          $addproduct=new Product();
-          $addproduct-> addProduct($connn, $selectcategory, $productname, $pageurl, $monthlyprice, $annualprice, $sku,
-          $webspace, $bandwidth, $freedomain, $ltsupport, $mailbox );
+        $addproduct=new Product();
+        $addproduct-> addProduct($connn, $selectcategory, $productname, $pageurl, $monthlyprice, $annualprice, $sku,
+        $webspace, $bandwidth, $freedomain, $ltsupport, $mailbox );
 
-        }
+        
 
         
         //echo '<script>alert("heelllooo");</script>';
@@ -249,6 +245,8 @@ var count10=0;
 
 
 $(document).ready(function(){
+
+  
 
 
 
@@ -356,6 +354,7 @@ a();
 
 $("#proannualprice").focusout(function() {
 $proprice = $("#proannualprice").val();
+$proprice1 = $("#proprice").val();
 if ($proprice == "") {
     $("#prodallprice").html("*Enter Product Annual price");
     $("#prodallprice").show();
@@ -378,6 +377,12 @@ else {
     //$("#add").attr("disabled",false);
     $("#prodallprice").hide();
     $(this).css('border', 'solid 3px green');
+    if($($proprice1 > $proprice)) {
+       alert("monthly price cant be more than annual price!!");
+       $("#proprice").val("");
+       $("#proprice").css('border', 'solid 3px red'); 
+       count3=0;
+    }
 }
 a();
 
@@ -515,21 +520,21 @@ $("#profree").focusout(function() {
 $("#prolang").focusout(function() {
     $prolang = $("#prolang").val();
     if ($prolang == "") {
-        $("#prodlang").html("*Enter lang Space in G.B");
+        $("#prodlang").html("*Enter language!!");
         $("#prodlang").show();
        $("#add").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count8=0;
-    }  
-    else if(!$prolang.match(/^[a-zA-Z, ]+[_a-zA-Z]+$/))
+    } 
+    else if(!$prolang.match(/^(((?!\s)+[a-zA-Z0-9]+[a-zA-Z0-9*(+*, )]+))+$/))
     {
         $("#prodlang").html("*Enter Valid language");
         $("#prodlang").show();
-       $("#add").attr("disabled",true);
-
-        $(this).css('border', 'solid 3px red'); 
+        $("#add").attr("disabled",true);
+        $(this).css('border', 'solid 3px red');
         count8=0;
+        
     }
     else if($prolang<.5)
     {
@@ -537,12 +542,13 @@ $("#prolang").focusout(function() {
         $("#prodlang").show();
        $("#add").attr("disabled",true);
 
-        $(this).css('border', 'solid 3px red'); 
+        $(this).css('border', 'solid 3px red');
         count8=0;
     }
    
 
-    
+    //[a-zA-Z, ]+[a-zA-Z0-9] 
+    //([a-zA-Z0-9]+(, [a-zA-z0-9]+)) 
     
     else {
       
@@ -550,6 +556,21 @@ $("#prolang").focusout(function() {
         //$("#add").attr("disabled",false);
         $("#prodlang").hide();
         $(this).css('border', 'solid 3px green');
+        if($prolang.endsWith(",")) {
+          $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+       $("#add").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+        } else if($prolang.endsWith(" ")) {
+          $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+       $("#add").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+        }
     }
     a();
 
@@ -561,6 +582,15 @@ $("#prolang").focusout(function() {
 
 $("#promail").focusout(function() {
     $promail = $("#promail").val();
+    $first=$("#promail").val().substr(0,1);
+    if($first.match(/^[a-zA-Z]+$/))
+    {
+       $pattern=/^[a-zA-Z]+$/;
+    }
+    else if($first.match(/^[0-9]+$/))
+    {
+       $pattern=/^[0-9]+$/;
+    }
     if ($promail == "") {
         $("#prodmail").html("*Enter Mail");
         $("#prodmail").show();
@@ -569,7 +599,7 @@ $("#promail").focusout(function() {
         $(this).css('border', 'solid 3px red');
         count9=0;
     }  
-    else if(!$promail.match(/^([a-zA-Z0-9])+$/))
+    else if(!$promail.match($pattern))
     {
         $("#prodmail").html("*Enter Valid Mail box no.");
         $("#prodmail").show();
@@ -598,6 +628,7 @@ $("#promail").focusout(function() {
 $("#prosku").focusout(function() {
     $prosku = $("#prosku").val();
     $prosku1=$prosku.substr(0,1);
+    
     if ($prosku == "") {
         $("#prodsku").html("*Enter sku");
         $("#prodsku").show();
@@ -605,22 +636,11 @@ $("#prosku").focusout(function() {
 
         $(this).css('border', 'solid 3px red');
         count10=0;
-    } else if($prosku.length>1 && $prosku.startsWith("#")) {
-
-      count10=1;
-        //$("#add").attr("disabled",false);
-        $("#prodsku").hide();
-        $(this).css('border', 'solid 3px green');
-
-    } else if($prosku.length>1 && $prosku.startsWith("-")) {
-
-      count10=1;
-      //$("#add").attr("disabled",false);
-      $("#prodsku").hide();
-      $(this).css('border', 'solid 3px green');
-
     }
-    else if(!$prosku.match(/^[a-zA-z0-9]+[a-zA-Z0-9#-]+$/))
+    
+
+    
+    else if(!$prosku.match(/^([#-]*[a-zA-z0-9])+[a-zA-Z0-9#-]+$/))
     {
         $("#prodsku").html("*Enter Valid sku");
         $("#prodsku").show();
@@ -628,6 +648,12 @@ $("#prosku").focusout(function() {
 
         $(this).css('border', 'solid 3px red'); 
         count10=0;
+        if($prosku.match(/^[a-zA-Z]+$/)) {
+          count10=1;
+          //$("#add").attr("disabled",false);
+          $("#prodsku").hide();
+          $(this).css('border', 'solid 3px green');
+        }
     }
   
     

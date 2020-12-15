@@ -12,28 +12,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 ?>
 		<!---singleblog--->
-				<div class="content">
-					<div class="linux-section">
-						<div class="container">
-							<div class="linux-grids">
-								<div class="col-md-8 linux-grid">
-								<h2>CMS Hosting</h2>
-								<ul>
-									<li><span>Unlimited </span> domains, email and disk space</li>
-									<li><span>99.9% uptime </span> with dedicated 24/7 technical support</li>
-									<li><span>1 click</span> WordPress Installation with cPanel (demo) platform</li>
-									<li><span>Launch  </span> your business with Rs. 1000* Google AdWords Credit *</li>
-									<li><span>30 day </span> Money Back Guarantee</li>
-								</ul>
-									<a href="#">view plans</a>
-								</div>
-								<div class="col-md-4 linux-grid1">
-									<img src="images/cms.png" class="img-responsive" alt=""/>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
+				
 					<div class="tab-prices">
 						<div class="container">
 							<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">

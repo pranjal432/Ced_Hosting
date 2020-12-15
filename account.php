@@ -139,6 +139,8 @@ var count_cpass=0;
 //var mobile_no='';
 var c=0;
 var v=0;
+// var z=0;
+// var y=0;
 
 
 function validate() {
@@ -183,6 +185,28 @@ $("#mobile").bind("keypress", function (e) {
 	// 	 }
 	// }
 
+	// z+=$("#mobile").length;
+
+	// if(z==10) {
+	// 	for(i=0;i<10;i++) {
+	// 		var g=$("#mobile").val().substr(i,1);
+	// 		var h=$("#mobile").val().substr(i+1,1);
+	// 		if(g==h) {
+	// 			y++;
+				
+				
+	// 		}
+	// 		if(y==9) {
+				
+	// 			$("#mobile").val("");
+	// 			z=0;
+	// 			y=0;
+				
+
+	// 		}
+	// 	}
+	// }
+
 	
 	
 	var keyCode = e.which ? e.which : e.keyCode
@@ -201,8 +225,17 @@ $('#mobile').on("cut copy paste drag drop",function(e) {
 
 $("#mobile").bind("keyup", function (e) {
 
+	// if(y!=9) {
+	// 	//$("#mobile").val("");
+		
+	// 	z=0;
+	// 	y=0;
+
+	// }
+
 	mobile_no=$("#mobile").val();
 	count_mob+=$("#mobile").length;
+	console.log(count_mob);
 
 	var fchar=$("#mobile").val().substr(0, 1);
 	var schar=$("#mobile").val().substr(1,1);
@@ -218,7 +251,7 @@ $("#mobile").bind("keyup", function (e) {
 					v++;
 					
 				}
-				if(v==10) {
+				if(v==9) {
 				$("#mobile").val("");
 				count_mob=0;
 				v=0;
@@ -242,13 +275,14 @@ $("#mobile").bind("keyup", function (e) {
 		$('#mobile').attr('maxlength','10');
 		$('#mobile').attr('minlength','10');
         //console.log(count_mob2);
-		console.log(count_mob);
+		//console.log(count_mob);
 		if(count_mob==10) {
 		for(i=0;i<10;i++) {
 			var a=$("#mobile").val().substr(i,1);
 			var b=$("#mobile").val().substr(i+1,1);
 			if(a==b) {
 				v++;
+				console.log(v);
 				
 				
 			}

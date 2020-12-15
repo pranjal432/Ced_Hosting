@@ -38,19 +38,22 @@
             <div class="card-header bg-transparent pb-5">
               
              <h3 class="text-center">Add Category</h3>
+             <strong><u>Note : </u></strong><span> * means required</span><br>
             </div>
             <div class="card-body px-lg-5 py-lg-5">
+            
               
               <form role="form" method="POST">
 
               <div class="form-group">
+                  
                   <div class="input-group input-group-merge 
                   input-group-alternative mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"></span>
                     </div>
                     <select class="form-control" name="selectcategory" id="selectc" required>
-                    <option value="" hidden>--Please Select Parent Category--</option>
+                    <option value="" hidden>--Please Select Parent Category*--</option>
 
                     <?php
                       $cat=new Product();
@@ -82,7 +85,7 @@
                       <span class="input-group-text"></span>
                     </div>
                     <input class="form-control" pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" name="subcategory" 
-                    placeholder="Please Enter Sub-Category Name" type="text" id="scn" required>
+                    placeholder="Please Enter Sub-Category Name*" type="text" id="scn" required>
                     <p id="subname"></p>
                   </div>
                 </div>
@@ -338,9 +341,10 @@
 ?>
 
 <script>
-
+///^(([a-zA-Z0-9 ]+[a-zA-Z0-9*(+*,)+]+))+$/
 var count1=0;
 var count2=0;
+$("#add").attr("disabled",true);
 
 $(document).ready(function() {
 
@@ -365,15 +369,15 @@ $(document).ready(function() {
 $("#scn").focusout(function() {
 $proname = $(this).val();
 if ($proname == "") {
-    $("#subname").html("*Enter Product Name");
+    $("#subname").html("*Enter Category Name");
     $("#subname").show();
     $("#add").attr("disabled",true);
     $(this).css('border', 'solid 3px red');
     count2=0;
 }
-else if(!$proname.match(/^[a-zA-Z_]+([-/.])*( [a-zA-Z_]+)*(-[0-9]+(?!-)+)*$/))
+else if(!$proname.match(/^[a-zA-Z0-9]+[-/.]*$/))
 {
-    $("#subname").html("*Enter Valid Product Name");
+    $("#subname").html("*Enter Valid Category Name");
     $("#subname").show();
     $("#add").attr("disabled",true);
     $(this).css('border', 'solid 3px red'); 
@@ -391,6 +395,31 @@ else {
 }
 a();
   });
+
+$('#scn').bind("keypress keyup keydown", function (e){
+
+var scn = $('#scn').val();
+var regtwodots = /^(?!.*?\.\.).*?$/;
+var lscn = scn.length;
+if ((scn.indexOf(".") == 0) || !(regtwodots.test(scn))) {
+	alert("invalid category name!!");
+	
+  $("#subname").html("*Enter Valid Category Name");
+    $("#subname").show();
+    $("#add").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count2=0;
+    $("#scn").val("");
+
+	return;
+}  else if(Number.isInteger(parseInt($('#scn').val()))) {
+        alert('Please Enter Valid Category Name!!');
+        $('#scn').val("");
+        return false;
+        }
+        else
+        return true;
+});
 
   function a() {
     if((count1+count2==2)) {

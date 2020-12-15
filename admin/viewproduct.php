@@ -266,7 +266,7 @@
                         ?>
                         
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row2; ?>" name="<?php  echo $key2; ?>">
+                          <input type="text" id="defaultForm-pass" class="form-control validate" id="<?php  echo $row2; ?>" value="<?php  echo $row2; ?>" name="<?php  echo $key2; ?>">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass"><?php  echo $key2; ?></label>
                         </div>
 
@@ -278,7 +278,7 @@
 
                       </div>
                       <div class="modal-footer d-flex justify-content-center">
-                        <input type="submit" class="btn btn-default" value="Edit" name="edit">
+                        <input type="submit" class="btn btn-default" value="Edit" id="edit1" name="edit">
                       </div>
                       </form>
                     </div>
@@ -342,3 +342,482 @@
     require "footer.php";
 
 ?>
+
+<script>
+
+var count1=0;
+var count2=0;
+var count3=0;
+var count4=0;
+var count5=0;
+var count6=0;
+var count7=0;
+var count8=0;
+var count9=0;
+var count10=0;
+
+
+
+$(document).ready(function(){
+
+  
+
+
+
+
+$("#prodCategory").hide();
+$("#prodname").hide();
+$("#produrl").hide();
+$("#prodprice").hide();
+$("#prodallprice").hide();
+$("#prodsku").hide();
+$("#prodweb").hide();
+$("#prodband").hide();
+$("#prodfree").hide();
+$("#prodlang").hide();
+$("#prodmail").hide();
+$("#edit").attr("disabled",true);
+
+// $("#proname").value();
+
+$("#select").focusout(function() {
+$categoryid = $("#select").val();
+if ($categoryid == "") {
+    $("#prodCategory").html("*Select Category");
+    $("#prodCategory").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count1=0;
+} else {
+  
+  count1=1;
+    //$("#add").attr("disabled",false);
+    $("#prodCategory").hide();
+    $(this).css('border', 'solid 3px green');
+}
+a();
+});
+
+$("#proname").focusout(function() {
+$proname = $(this).val();
+if ($proname == "") {
+    $("#prodname").html("*Enter Product Name");
+    $("#prodname").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count2=0;
+}
+else if(!$proname.match(/^[a-zA-Z_]+( [a-zA-Z_]+)*(-[0-9]+(?!-)+)*$/))
+{
+    $("#prodname").html("*Enter Valid Product Name");
+    $("#prodname").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count2=0;
+}
+
+
+
+else {
+  
+  count2=1;
+    //$("#add").attr("disabled",false);
+    $("#prodname").hide();
+    $(this).css('border', 'solid 3px green');
+}
+a();
+
+
+
+});
+
+$("#proprice").focusout(function() {
+$proprice = $("#proprice").val();
+
+
+if ($proprice == "") {
+    $("#prodprice").html("*Select Product price");
+    $("#prodprice").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count3=0;
+}  
+else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
+{
+    $("#prodprice").html("*Select Valid Product price");
+    $("#prodprice").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count3=0;
+}
+
+
+else {
+  
+  count3=1;
+    //$("#add").attr("disabled",false);
+    $("#prodprice").hide();
+    $(this).css('border', 'solid 3px green');
+}
+a();
+
+
+
+});
+
+
+$("#proannualprice").focusout(function() {
+$proprice = $("#proannualprice").val();
+$proprice1 = $("#proprice").val();
+if ($proprice == "") {
+    $("#prodallprice").html("*Enter Product Annual price");
+    $("#prodallprice").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count4=0;
+}  
+else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
+{
+    $("#prodallprice").html("*Enter Valid Product Annual price");
+    $("#prodallprice").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count4=0;
+}
+
+else {
+  
+  count4=1;
+    //$("#add").attr("disabled",false);
+    $("#prodallprice").hide();
+    $(this).css('border', 'solid 3px green');
+    if($($proprice1 > $proprice)) {
+       alert("monthly price cant be more than annual price!!");
+       $("#proprice").val("");
+       $("#proprice").css('border', 'solid 3px red'); 
+       count3=0;
+    }
+}
+a();
+
+
+
+});
+
+
+$("#proweb").focusout(function() {
+$proprice = $("#proweb").val();
+if ($proprice == "") {
+    $("#prodweb").html("*Select Web Space in G.B");
+    $("#prodweb").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count5=0;
+}  
+else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
+{
+    $("#prodweb").html("*Select Valid Web Space price");
+    $("#prodweb").show();
+    $("#edit1").attr("disabled",true);
+    $(this).css('border', 'solid 3px red'); 
+    count5=0;
+}
+
+
+
+else {
+  
+  count5=1;
+    //$("#add").attr("disabled",false);
+    $("#prodweb").hide();
+    $(this).css('border', 'solid 3px green');
+}
+a();
+
+
+
+});
+
+
+
+$("#proband").focusout(function() {
+    $proband = $("#proband").val();
+    if ($proband == "") {
+        $("#prodband").html("*Enter band Space in G.B");
+        $("#prodband").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count6=0;
+    }  
+    else if(!$proband.match(/^[0-9]\d*(\.\d+)?$/))
+    {
+        $("#prodband").html("*Enter Valid band Space");
+        $("#prodband").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red'); 
+        count6=0;
+    }
+    else if($proband<.5)
+    {
+        $("#prodband").html("*Enter Valid band Space");
+        $("#prodband").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red'); 
+        count6=0;
+    }
+
+    
+    
+    else {
+      
+      count6=1;
+        //$("#add").attr("disabled",false);
+        $("#prodband").hide();
+        $(this).css('border', 'solid 3px green');
+    }
+    a();
+
+
+
+});
+
+$("#profree").focusout(function() {
+    $profree = $("#profree").val();
+    $first=$profree.substr(0,1);
+    console.log($first);
+    
+    if($first.match(/^[a-zA-Z]+$/))
+    {
+       $pattern=/^[a-zA-Z]+$/;
+    }
+    else if($first.match(/^[0-9]+$/))
+    {
+       $pattern=/^[0-9]+$/;
+    } 
+    if ($profree == "") {
+        $("#prodfree").html("*Enter Free Domain as 0 if not required");
+        $("#prodfree").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count7=0;
+    }  else if(!$profree.match($pattern))
+    {
+        $("#prodfree").html("*Enter Valid Free Domain");
+        $("#prodfree").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count7=0;
+    }
+  
+
+    
+    
+    else {
+      
+      count7=1;
+        //$("#add").attr("disabled",false);
+        $("#prodfree").hide();
+        $(this).css('border', 'solid 3px green');
+    }
+    a();
+
+
+
+});
+
+
+$("#prolang").focusout(function() {
+    $prolang = $("#prolang").val();
+    if ($prolang == "") {
+        $("#prodlang").html("*Enter language!!");
+        $("#prodlang").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+    } 
+    else if(!$prolang.match(/^(((?!\s)+[a-zA-Z0-9]+[a-zA-Z0-9*(+*, )]+))+$/))
+    {
+        $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+        $("#edit1").attr("disabled",true);
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+        
+    }
+    else if($prolang<.5)
+    {
+        $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+    }
+   
+
+    //[a-zA-Z, ]+[a-zA-Z0-9] 
+    //([a-zA-Z0-9]+(, [a-zA-z0-9]+)) 
+    
+    else {
+      
+      count8=1;
+        //$("#add").attr("disabled",false);
+        $("#prodlang").hide();
+        $(this).css('border', 'solid 3px green');
+        if($prolang.endsWith(",")) {
+          $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+        } else if($prolang.endsWith(" ")) {
+          $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+        }
+    }
+    a();
+
+
+
+});
+
+
+
+$("#promail").focusout(function() {
+    $promail = $("#promail").val();
+    $first=$("#promail").val().substr(0,1);
+    if($first.match(/^[a-zA-Z]+$/))
+    {
+       $pattern=/^[a-zA-Z]+$/;
+    }
+    else if($first.match(/^[0-9]+$/))
+    {
+       $pattern=/^[0-9]+$/;
+    }
+    if ($promail == "") {
+        $("#prodmail").html("*Enter Mail");
+        $("#prodmail").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count9=0;
+    }  
+    else if(!$promail.match($pattern))
+    {
+        $("#prodmail").html("*Enter Valid Mail box no.");
+        $("#prodmail").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red'); 
+        count9=0;
+    }
+  
+    
+    
+    else {
+      
+      count9=1;
+        //$("#add").attr("disabled",false);
+        $("#prodmail").hide();
+        $(this).css('border', 'solid 3px green');
+    }
+    a();
+
+
+
+});
+
+
+$("#prosku").focusout(function() {
+    $prosku = $("#prosku").val();
+    $prosku1=$prosku.substr(0,1);
+    
+    if ($prosku == "") {
+        $("#prodsku").html("*Enter sku");
+        $("#prodsku").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count10=0;
+    }
+    // else if($prosku.length>1 && $prosku.startsWith("#")) {
+
+    //   count10=1;
+    //     //$("#add").attr("disabled",false);
+    //     $("#prodsku").hide();
+    //     $(this).css('border', 'solid 3px green');
+
+    // } else if($prosku.length>1 && $prosku.startsWith("-")) {
+
+    //   count10=1;
+    //   //$("#add").attr("disabled",false);
+    //   $("#prodsku").hide();
+    //   $(this).css('border', 'solid 3px green');
+
+    // }
+    else if(!$prosku.match(/^([#-]*[a-zA-z0-9])+[a-zA-Z0-9#-]+$/))
+    {
+        $("#prodsku").html("*Enter Valid sku");
+        $("#prodsku").show();
+       $("#edit1").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red'); 
+        count10=0;
+        if($prosku.match(/^[a-zA-Z]+$/)) {
+          count10=1;
+          //$("#add").attr("disabled",false);
+          $("#prodsku").hide();
+          $(this).css('border', 'solid 3px green');
+        }
+    }
+  
+    
+    
+    else {
+      
+      count10=1;
+        //$("#add").attr("disabled",false);
+        $("#prodsku").hide();
+        $(this).css('border', 'solid 3px green');
+    }
+    a();
+
+
+
+});
+
+
+function a() {
+  if((count1+count2+count3+count4+count5+count6+count7+count8+count9+count10)==10) {
+
+    $("#edit1").attr("disabled",false);
+
+  }
+
+}
+
+
+
+
+
+
+
+});
+
+
+// if(count>=8) {
+//   $("#add").attr("disabled",false);
+// }
+
+</script>
