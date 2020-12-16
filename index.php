@@ -12,9 +12,7 @@ require "header.php";
 if(isset($_SESSION['admindata'])) {
 	echo '<script>window.location="admin/index.php";</script>';
 }
-if(isset($_SESSION['userdata'])) {
-	echo '<script>window.location="index.php";</script>';
-}
+
 
 ?>
 	<!---banner--->

@@ -284,7 +284,7 @@
 
                       </div>
                       <div class="modal-footer d-flex justify-content-center">
-                        <input type="submit" class="btn btn-default" value="Edit" id="edit1" name="edit">
+                        <input type="submit" class="btn btn-default" value="Update" id="edit1" name="edit">
                       </div>
                       </form>
                     </div>

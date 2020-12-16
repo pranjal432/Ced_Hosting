@@ -321,10 +321,24 @@ a();
 
 $("#proprice").focusout(function() {
 
-  if(parseInt($("#proprice").val(),10) > parseInt($("#proannualprice").val())) {
+  if(parseFloat($("#proprice").val()) > parseFloat($("#proannualprice").val())) {
        //alert("monthly price cant be more than annual price!!");
-       $("#proprice").val("");
-       $("#proprice").css('border', 'solid 3px red'); 
+       //$("#proprice").val("");
+       $("#proannualprice").css('border', 'solid 3px red');
+       $("#prodallprice").show();
+       $("#prodallprice").html("*Annual price can't be less than monthly price.");
+       count4=0;
+  }
+  if(parseFloat($("#proprice").val()) == parseFloat($("#proannualprice").val())) {
+       //alert("monthly price cant be more than annual price!!");
+       //$("#proprice").val("");
+       $("#proannualprice").css('border', 'solid 3px red'); 
+       $("#proprice").css('border', 'solid 3px red');
+       $("#prodallprice").show();
+       $("#prodprice").show();
+       $("#prodallprice").html("*Annual price and monthly price can't be same.");
+       $("#prodprice").html("*Annual price and monthly price can't be same.."); 
+       count4=0;
        count3=0;
   }
 $proprice = $("#proprice").val();
@@ -362,12 +376,7 @@ a();
 
 
 $("#proannualprice").focusout(function() {
-  if(parseInt($("#proprice").val(),10) > parseInt($("#proannualprice").val())) {
-       //alert("monthly price cant be more than annual price!!");
-       $("#proprice").val("");
-       $("#proprice").css('border', 'solid 3px red'); 
-       count3=0;
-}
+  
 $proprice = $("#proannualprice").val();
 $proprice1 = $("#proprice").val();
 if ($proprice == "") {
@@ -392,6 +401,26 @@ else {
     //$("#add").attr("disabled",false);
     $("#prodallprice").hide();
     $(this).css('border', 'solid 3px green');
+    if(parseFloat($("#proprice").val()) > parseFloat($("#proannualprice").val())) {
+       //alert("monthly price cant be more than annual price!!");
+       //$("#proprice").val("");
+       $("#prodallprice").show();
+       $("#prodallprice").html("*Annual price can't be less than monthly price.");
+       $("#proannualprice").css('border', 'solid 3px red'); 
+       count4=0;
+}
+if(parseFloat($("#proprice").val()) == parseFloat($("#proannualprice").val())) {
+       //alert("monthly price cant be more than annual price!!");
+       //$("#proprice").val("");
+       $("#proannualprice").css('border', 'solid 3px red'); 
+       $("#proprice").css('border', 'solid 3px red'); 
+       $("#prodallprice").show();
+       $("#prodprice").show();
+       $("#prodallprice").html("*Annual price and monthly price can't be same.");
+       $("#prodprice").html("*Annual price and monthly price can't be same.."); 
+       count4=0;
+       count3=0;
+  }
 
     
     
@@ -546,6 +575,12 @@ $("#prolang").focusout(function() {
         $("#add").attr("disabled",true);
         $(this).css('border', 'solid 3px red');
         count8=0;
+        if($prolang.match(/^[a-zA-Z]+$/)) {
+          count8=1;
+        //$("#add").attr("disabled",false);
+        $("#prodlang").hide();
+        $(this).css('border', 'solid 3px green');
+        }
         
     }
     else if($prolang<.5)
@@ -576,6 +611,20 @@ $("#prolang").focusout(function() {
         $(this).css('border', 'solid 3px red');
         count8=0;
         } else if($prolang.endsWith(" ")) {
+          $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+       $("#add").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+        } else if($prolang.match(/^[0-9]+$/)) {
+          $("#prodlang").html("*Enter Valid language");
+        $("#prodlang").show();
+       $("#add").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red');
+        count8=0;
+        } else if($prolang.match(/^(([a-zA-Z0-9]+)+(,[0-9]*)+)+$/)) {
           $("#prodlang").html("*Enter Valid language");
         $("#prodlang").show();
        $("#add").attr("disabled",true);
@@ -640,6 +689,8 @@ $("#promail").focusout(function() {
 $("#prosku").focusout(function() {
     $prosku = $("#prosku").val();
     $prosku1=$prosku.substr(0,1);
+
+    
     
     if ($prosku == "") {
         $("#prodsku").html("*Enter sku");
@@ -647,6 +698,13 @@ $("#prosku").focusout(function() {
        $("#add").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
+        count10=0;
+    } else if($prosku.endsWith("--") || $prosku.endsWith("##")) {
+          $("#prodsku").html("*Enter Valid sku");
+        $("#prodsku").show();
+       $("#add").attr("disabled",true);
+
+        $(this).css('border', 'solid 3px red'); 
         count10=0;
     }
     
@@ -665,7 +723,7 @@ $("#prosku").focusout(function() {
           //$("#add").attr("disabled",false);
           $("#prodsku").hide();
           $(this).css('border', 'solid 3px green');
-        }
+        } 
     }
   
     

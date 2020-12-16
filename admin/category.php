@@ -84,7 +84,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"></span>
                     </div>
-                    <input class="form-control" pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" name="subcategory" 
+                    <input class="form-control" name="subcategory" 
                     placeholder="Please Enter Sub-Category Name*" type="text" id="scn" required>
                     <p id="subname"></p>
                   </div>
@@ -148,6 +148,7 @@
                   if($row['id']==1) {
                     continue;
                   }
+                  if($row['prod_parent_id']==1) {
                     
                     
                 ?>
@@ -282,6 +283,7 @@
                 </div>
                 <?php 
                     }
+                  }
                   
                   
                 ?>
@@ -368,6 +370,14 @@ $(document).ready(function() {
 
 $("#scn").focusout(function() {
 $proname = $(this).val();
+
+if($proname.endsWith(".")) {
+  $("#subname").html("*Enter Category Name");
+    $("#subname").show();
+    $("#add").attr("disabled",true);
+    $(this).css('border', 'solid 3px red');
+    count2=0;
+}
 if ($proname == "") {
     $("#subname").html("*Enter Category Name");
     $("#subname").show();
@@ -375,7 +385,7 @@ if ($proname == "") {
     $(this).css('border', 'solid 3px red');
     count2=0;
 }
-else if(!$proname.match(/^[a-zA-Z0-9]+[-/.]*$/))
+else if(!$proname.match(/^[a-zA-Z0-9]+([-/.]*[a-zA-Z0-9])*$/))
 {
     $("#subname").html("*Enter Valid Category Name");
     $("#subname").show();
@@ -402,7 +412,7 @@ var scn = $('#scn').val();
 var regtwodots = /^(?!.*?\.\.).*?$/;
 var lscn = scn.length;
 if ((scn.indexOf(".") == 0) || !(regtwodots.test(scn))) {
-	alert("invalid category name!!");
+	//alert("invalid category name!!");
 	
   $("#subname").html("*Enter Valid Category Name");
     $("#subname").show();
