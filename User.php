@@ -214,6 +214,31 @@ require_once "/opt/lampp/htdocs/training/CedHosting/vendor/autoload.php";
             }
         }
 
+        function fetchChildId($connn, $id) {
+            $arr=array();
+            $sql="SELECT * from tbl_product WHERE `prod_parent_id`='".$id."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    array_push($arr, $row);
+                }
+                return $arr;
+            }
+        }
+
+        function fetchProductDetails($connn, $id1) {
+
+            $arr=array();
+            $sql="SELECT * from tbl_product INNER JOIN tbl_product_description ON tbl_product.id=tbl_product_description.prod_id WHERE `prod_id`='".$id1."'";
+            $result=$connn->con->query($sql);
+            if($result->num_rows >0) {
+                while($row=$result->fetch_assoc()) {
+                    array_push($arr, $row);
+                }
+                return $arr;
+            }
+        }
+
 
     }
 

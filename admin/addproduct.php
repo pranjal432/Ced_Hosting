@@ -248,6 +248,8 @@ $(document).ready(function(){
 
   
 
+  
+
 
 
 
@@ -318,6 +320,13 @@ a();
 });
 
 $("#proprice").focusout(function() {
+
+  if(parseInt($("#proprice").val(),10) > parseInt($("#proannualprice").val())) {
+       //alert("monthly price cant be more than annual price!!");
+       $("#proprice").val("");
+       $("#proprice").css('border', 'solid 3px red'); 
+       count3=0;
+  }
 $proprice = $("#proprice").val();
 
 
@@ -353,6 +362,12 @@ a();
 
 
 $("#proannualprice").focusout(function() {
+  if(parseInt($("#proprice").val(),10) > parseInt($("#proannualprice").val())) {
+       //alert("monthly price cant be more than annual price!!");
+       $("#proprice").val("");
+       $("#proprice").css('border', 'solid 3px red'); 
+       count3=0;
+}
 $proprice = $("#proannualprice").val();
 $proprice1 = $("#proprice").val();
 if ($proprice == "") {
@@ -377,12 +392,9 @@ else {
     //$("#add").attr("disabled",false);
     $("#prodallprice").hide();
     $(this).css('border', 'solid 3px green');
-    if($($proprice1 > $proprice)) {
-       alert("monthly price cant be more than annual price!!");
-       $("#proprice").val("");
-       $("#proprice").css('border', 'solid 3px red'); 
-       count3=0;
-    }
+
+    
+    
 }
 a();
 

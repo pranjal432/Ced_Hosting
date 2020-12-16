@@ -202,9 +202,14 @@
         function editProduct($connn, $selectcat, $idfield, $prodname, $prodlink, $avail, $mprice,
         $aprice, $esku, $webspace, $bandwidth, $freedomain, $ltsupport, $mailbox ) {
 
-            $sql="UPDATE tbl_product SET `prod_parent_id`='".$selectcat."' , `prod_name`='".$prodname."' , 
-            `prod_available`='".$avail."' , `html`='".$prodlink."' WHERE `id`='".$idfield."'";
+            $sql="UPDATE tbl_product SET `prod_parent_id`='".$selectcat."' WHERE `id`='".$idfield."'";
             if($connn->con->query($sql)==true) {
+                
+            }
+
+            $sql2="UPDATE tbl_product SET `prod_name`='".$prodname."' , 
+            `prod_available`='".$avail."' , `html`='".$prodlink."' WHERE `id`='".$idfield."'";
+            if($connn->con->query($sql2)==true) {
                 
             }
 
@@ -247,6 +252,8 @@
 
 
         }
+
+        
     }
 
 ?>

@@ -168,7 +168,7 @@
                       <div class="modal-body mx-3">
                       <div class="md-form mb-4">
                           
-                          <select id="defaultForm-pass" class="form-control validate" name="selectcat">
+                          <select id="select1" class="form-control validate" name="selectcat">
                           
                           
                           <?php
@@ -210,12 +210,14 @@
                           ?>
                           
                           </select>
-                          <label data-error="wrong" data-success="right" for="defaultForm-pass">Product Parent Name</label>
+                          <label data-error="wrong" data-success="right" for="defaultForm-pass">Product Category Name</label>
+                          <p id="prodCategory"></p>
                         </div>
 
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['prod_name']; ?>" name="prodname">
+                          <input type="text" id="proname1" class="form-control validate" value="<?php  echo $row['prod_name']; ?>" name="prodname">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">Product Name</label>
+                          <p id="prodname1"></p>
                         </div>
 
                         <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['prod_id']; ?>" name="idfield" hidden>
@@ -242,18 +244,21 @@
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">Product Availability</label>
                         </div>
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['mon_price']; ?>" name="mprice">
+                          <input type="text" id="proprice1" class="form-control validate" value="<?php  echo $row['mon_price']; ?>" name="mprice">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">Monthly Price</label>
+                          <p id="prodprice1"></p>
                         </div>
 
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['annual_price']; ?>" name="aprice">
+                          <input type="text" id="proannualprice1" class="form-control validate" value="<?php  echo $row['annual_price']; ?>" name="aprice">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">Annual Price</label>
+                          <p id="prodallprice1"></p>
                         </div>
 
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['sku']; ?>" name="esku">
+                          <input type="text" id="prosku1" class="form-control validate" value="<?php  echo $row['sku']; ?>" name="esku">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">Sku</label>
+                          <p id="prodsku1"></p>
                         </div>
 
                         <?php
@@ -266,8 +271,9 @@
                         ?>
                         
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" id="<?php  echo $row2; ?>" value="<?php  echo $row2; ?>" name="<?php  echo $key2; ?>">
+                          <input type="text" id="defaultForm-pass" class="form-control validate" id="<?php  echo $row2; ?>1" value="<?php  echo $row2; ?>" name="<?php  echo $key2; ?>">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass"><?php  echo $key2; ?></label>
+                          <p id="<?php  echo $row2; ?>12"></p>
                         </div>
 
                         <?php
@@ -366,52 +372,52 @@ $(document).ready(function(){
 
 
 $("#prodCategory").hide();
-$("#prodname").hide();
+$("#prodname1").hide();
 $("#produrl").hide();
-$("#prodprice").hide();
-$("#prodallprice").hide();
-$("#prodsku").hide();
-$("#prodweb").hide();
-$("#prodband").hide();
-$("#prodfree").hide();
-$("#prodlang").hide();
-$("#prodmail").hide();
-$("#edit").attr("disabled",true);
+$("#prodprice1").hide();
+$("#prodallprice1").hide();
+$("#prodsku1").hide();
+$("#webspace1").hide();
+$("#bandwidth1").hide();
+$("#freedomain1").hide();
+$("#ltsupport1").hide();
+$("#mailbox1").hide();
+//$("#edit1").attr("disabled",true);
 
 // $("#proname").value();
 
-$("#select").focusout(function() {
-$categoryid = $("#select").val();
+$("#select1").focusout(function() {
+$categoryid = $("#select1").val();
 if ($categoryid == "") {
-    $("#prodCategory").html("*Select Category");
-    $("#prodCategory").show();
-    $("#edit1").attr("disabled",true);
+    $("#prodCategory1").html("*Select Category");
+    $("#prodCategory1").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red');
     count1=0;
 } else {
   
   count1=1;
     //$("#add").attr("disabled",false);
-    $("#prodCategory").hide();
+    $("#prodCategory1").hide();
     $(this).css('border', 'solid 3px green');
 }
 a();
 });
 
-$("#proname").focusout(function() {
+$("#proname1").focusout(function() {
 $proname = $(this).val();
 if ($proname == "") {
-    $("#prodname").html("*Enter Product Name");
-    $("#prodname").show();
-    $("#edit1").attr("disabled",true);
+    $("#prodname1").html("*Enter Product Name");
+    $("#prodname1").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red');
     count2=0;
 }
 else if(!$proname.match(/^[a-zA-Z_]+( [a-zA-Z_]+)*(-[0-9]+(?!-)+)*$/))
 {
-    $("#prodname").html("*Enter Valid Product Name");
-    $("#prodname").show();
-    $("#edit1").attr("disabled",true);
+    $("#prodname1").html("*Enter Valid Product Name");
+    $("#prodname1").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red'); 
     count2=0;
 }
@@ -422,7 +428,7 @@ else {
   
   count2=1;
     //$("#add").attr("disabled",false);
-    $("#prodname").hide();
+    $("#prodname1").hide();
     $(this).css('border', 'solid 3px green');
 }
 a();
@@ -431,22 +437,22 @@ a();
 
 });
 
-$("#proprice").focusout(function() {
-$proprice = $("#proprice").val();
+$("#proprice1").focusout(function() {
+$proprice = $("#proprice1").val();
 
 
 if ($proprice == "") {
-    $("#prodprice").html("*Select Product price");
-    $("#prodprice").show();
-    $("#edit1").attr("disabled",true);
+    $("#prodprice1").html("*Select Product price");
+    $("#prodprice1").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red');
     count3=0;
 }  
 else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
 {
-    $("#prodprice").html("*Select Valid Product price");
-    $("#prodprice").show();
-    $("#edit1").attr("disabled",true);
+    $("#prodprice1").html("*Select Valid Product price");
+    $("#prodprice1").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red'); 
     count3=0;
 }
@@ -456,7 +462,7 @@ else {
   
   count3=1;
     //$("#add").attr("disabled",false);
-    $("#prodprice").hide();
+    $("#prodprice1").hide();
     $(this).css('border', 'solid 3px green');
 }
 a();
@@ -466,21 +472,21 @@ a();
 });
 
 
-$("#proannualprice").focusout(function() {
-$proprice = $("#proannualprice").val();
-$proprice1 = $("#proprice").val();
+$("#proannualprice1").focusout(function() {
+$proprice = $("#proannualprice1").val();
+$proprice1 = $("#proprice1").val();
 if ($proprice == "") {
-    $("#prodallprice").html("*Enter Product Annual price");
-    $("#prodallprice").show();
-    $("#edit1").attr("disabled",true);
+    $("#prodallprice1").html("*Enter Product Annual price");
+    $("#prodallprice1").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red');
     count4=0;
 }  
 else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
 {
-    $("#prodallprice").html("*Enter Valid Product Annual price");
-    $("#prodallprice").show();
-    $("#edit1").attr("disabled",true);
+    $("#prodallprice1").html("*Enter Valid Product Annual price");
+    $("#prodallprice1").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red'); 
     count4=0;
 }
@@ -489,12 +495,12 @@ else {
   
   count4=1;
     //$("#add").attr("disabled",false);
-    $("#prodallprice").hide();
+    $("#prodallprice1").hide();
     $(this).css('border', 'solid 3px green');
     if($($proprice1 > $proprice)) {
        alert("monthly price cant be more than annual price!!");
-       $("#proprice").val("");
-       $("#proprice").css('border', 'solid 3px red'); 
+       $("#proprice1").val("");
+       $("#proprice1").css('border', 'solid 3px red'); 
        count3=0;
     }
 }
@@ -505,20 +511,20 @@ a();
 });
 
 
-$("#proweb").focusout(function() {
-$proprice = $("#proweb").val();
+$("#webspace1").focusout(function() {
+$proprice = $("#webspace1").val();
 if ($proprice == "") {
-    $("#prodweb").html("*Select Web Space in G.B");
-    $("#prodweb").show();
-    $("#edit1").attr("disabled",true);
+    $("#webspace12").html("*Select Web Space in G.B");
+    $("#webspace12").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red');
     count5=0;
 }  
 else if(!$proprice.match(/^[0-9]\d*(\.\d+)?$/))
 {
-    $("#prodweb").html("*Select Valid Web Space price");
-    $("#prodweb").show();
-    $("#edit1").attr("disabled",true);
+    $("#webspace12").html("*Select Valid Web Space price");
+    $("#webspace12").show();
+    //$("#edit1").attr("disabled",true);
     $(this).css('border', 'solid 3px red'); 
     count5=0;
 }
@@ -529,7 +535,7 @@ else {
   
   count5=1;
     //$("#add").attr("disabled",false);
-    $("#prodweb").hide();
+    $("#webspace12").hide();
     $(this).css('border', 'solid 3px green');
 }
 a();
@@ -540,30 +546,30 @@ a();
 
 
 
-$("#proband").focusout(function() {
-    $proband = $("#proband").val();
+$("#bandwidth1").focusout(function() {
+    $proband = $("#bandwidth1").val();
     if ($proband == "") {
-        $("#prodband").html("*Enter band Space in G.B");
-        $("#prodband").show();
-       $("#edit1").attr("disabled",true);
+        $("#bandwidth12").html("*Enter band Space in G.B");
+        $("#bandwidth12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count6=0;
     }  
     else if(!$proband.match(/^[0-9]\d*(\.\d+)?$/))
     {
-        $("#prodband").html("*Enter Valid band Space");
-        $("#prodband").show();
-       $("#edit1").attr("disabled",true);
+        $("#bandwidth12").html("*Enter Valid band Space");
+        $("#bandwidth12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red'); 
         count6=0;
     }
     else if($proband<.5)
     {
-        $("#prodband").html("*Enter Valid band Space");
-        $("#prodband").show();
-       $("#edit1").attr("disabled",true);
+        $("#bandwidth12").html("*Enter Valid band Space");
+        $("#bandwidth12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red'); 
         count6=0;
@@ -575,7 +581,7 @@ $("#proband").focusout(function() {
       
       count6=1;
         //$("#add").attr("disabled",false);
-        $("#prodband").hide();
+        $("#bandwidth12").hide();
         $(this).css('border', 'solid 3px green');
     }
     a();
@@ -584,8 +590,8 @@ $("#proband").focusout(function() {
 
 });
 
-$("#profree").focusout(function() {
-    $profree = $("#profree").val();
+$("#freedomain1").focusout(function() {
+    $profree = $("#freedomain1").val();
     $first=$profree.substr(0,1);
     console.log($first);
     
@@ -598,17 +604,17 @@ $("#profree").focusout(function() {
        $pattern=/^[0-9]+$/;
     } 
     if ($profree == "") {
-        $("#prodfree").html("*Enter Free Domain as 0 if not required");
-        $("#prodfree").show();
-       $("#edit1").attr("disabled",true);
+        $("#freedomain12").html("*Enter Free Domain as 0 if not required");
+        $("#freedomain12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count7=0;
     }  else if(!$profree.match($pattern))
     {
-        $("#prodfree").html("*Enter Valid Free Domain");
-        $("#prodfree").show();
-       $("#edit1").attr("disabled",true);
+        $("#freedomain12").html("*Enter Valid Free Domain");
+        $("#freedomain12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count7=0;
@@ -621,7 +627,7 @@ $("#profree").focusout(function() {
       
       count7=1;
         //$("#add").attr("disabled",false);
-        $("#prodfree").hide();
+        $("#freedomain12").hide();
         $(this).css('border', 'solid 3px green');
     }
     a();
@@ -631,30 +637,30 @@ $("#profree").focusout(function() {
 });
 
 
-$("#prolang").focusout(function() {
-    $prolang = $("#prolang").val();
+$("#ltsupport1").focusout(function() {
+    $prolang = $("#ltsupport1").val();
     if ($prolang == "") {
-        $("#prodlang").html("*Enter language!!");
-        $("#prodlang").show();
-       $("#edit1").attr("disabled",true);
+        $("#ltsupport12").html("*Enter language!!");
+        $("#ltsupport12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count8=0;
     } 
     else if(!$prolang.match(/^(((?!\s)+[a-zA-Z0-9]+[a-zA-Z0-9*(+*, )]+))+$/))
     {
-        $("#prodlang").html("*Enter Valid language");
-        $("#prodlang").show();
-        $("#edit1").attr("disabled",true);
+        $("#ltsupport12").html("*Enter Valid language");
+        $("#ltsupport12").show();
+        //$("#edit1").attr("disabled",true);
         $(this).css('border', 'solid 3px red');
         count8=0;
         
     }
     else if($prolang<.5)
     {
-        $("#prodlang").html("*Enter Valid language");
-        $("#prodlang").show();
-       $("#edit1").attr("disabled",true);
+        $("#ltsupport12").html("*Enter Valid language");
+        $("#ltsupport12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count8=0;
@@ -668,19 +674,19 @@ $("#prolang").focusout(function() {
       
       count8=1;
         //$("#add").attr("disabled",false);
-        $("#prodlang").hide();
+        $("#ltsupport12").hide();
         $(this).css('border', 'solid 3px green');
         if($prolang.endsWith(",")) {
-          $("#prodlang").html("*Enter Valid language");
-        $("#prodlang").show();
-       $("#edit1").attr("disabled",true);
+          $("#ltsupport12").html("*Enter Valid language");
+        $("#ltsupport12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count8=0;
         } else if($prolang.endsWith(" ")) {
-          $("#prodlang").html("*Enter Valid language");
-        $("#prodlang").show();
-       $("#edit1").attr("disabled",true);
+          $("#ltsupport12").html("*Enter Valid language");
+        $("#ltsupport12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count8=0;
@@ -694,9 +700,9 @@ $("#prolang").focusout(function() {
 
 
 
-$("#promail").focusout(function() {
-    $promail = $("#promail").val();
-    $first=$("#promail").val().substr(0,1);
+$("#mailbox1").focusout(function() {
+    $promail = $("#mailbox1").val();
+    $first=$("#mailbox1").val().substr(0,1);
     if($first.match(/^[a-zA-Z]+$/))
     {
        $pattern=/^[a-zA-Z]+$/;
@@ -706,18 +712,18 @@ $("#promail").focusout(function() {
        $pattern=/^[0-9]+$/;
     }
     if ($promail == "") {
-        $("#prodmail").html("*Enter Mail");
-        $("#prodmail").show();
-       $("#edit1").attr("disabled",true);
+        $("#mailbox12").html("*Enter Mail");
+        $("#mailbox12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count9=0;
     }  
     else if(!$promail.match($pattern))
     {
-        $("#prodmail").html("*Enter Valid Mail box no.");
-        $("#prodmail").show();
-       $("#edit1").attr("disabled",true);
+        $("#mailbox12").html("*Enter Valid Mail box no.");
+        $("#mailbox12").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red'); 
         count9=0;
@@ -729,7 +735,7 @@ $("#promail").focusout(function() {
       
       count9=1;
         //$("#add").attr("disabled",false);
-        $("#prodmail").hide();
+        $("#mailbox12").hide();
         $(this).css('border', 'solid 3px green');
     }
     a();
@@ -739,14 +745,14 @@ $("#promail").focusout(function() {
 });
 
 
-$("#prosku").focusout(function() {
-    $prosku = $("#prosku").val();
+$("#prosku1").focusout(function() {
+    $prosku = $("#prosku1").val();
     $prosku1=$prosku.substr(0,1);
     
     if ($prosku == "") {
-        $("#prodsku").html("*Enter sku");
-        $("#prodsku").show();
-       $("#edit1").attr("disabled",true);
+        $("#prodsku1").html("*Enter sku");
+        $("#prodsku1").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red');
         count10=0;
@@ -768,16 +774,16 @@ $("#prosku").focusout(function() {
     // }
     else if(!$prosku.match(/^([#-]*[a-zA-z0-9])+[a-zA-Z0-9#-]+$/))
     {
-        $("#prodsku").html("*Enter Valid sku");
-        $("#prodsku").show();
-       $("#edit1").attr("disabled",true);
+        $("#prodsku1").html("*Enter Valid sku");
+        $("#prodsku1").show();
+       //$("#edit1").attr("disabled",true);
 
         $(this).css('border', 'solid 3px red'); 
         count10=0;
         if($prosku.match(/^[a-zA-Z]+$/)) {
           count10=1;
           //$("#add").attr("disabled",false);
-          $("#prodsku").hide();
+          $("#prodsku1").hide();
           $(this).css('border', 'solid 3px green');
         }
     }
@@ -788,7 +794,7 @@ $("#prosku").focusout(function() {
       
       count10=1;
         //$("#add").attr("disabled",false);
-        $("#prodsku").hide();
+        $("#prodsku1").hide();
         $(this).css('border', 'solid 3px green');
     }
     a();
@@ -798,14 +804,14 @@ $("#prosku").focusout(function() {
 });
 
 
-function a() {
-  if((count1+count2+count3+count4+count5+count6+count7+count8+count9+count10)==10) {
+// function a() {
+//   if((count1+count2+count3+count4+count5+count6+count7+count8+count9+count10)==10) {
 
-    $("#edit1").attr("disabled",false);
+//     $("#edit1").attr("disabled",false);
 
-  }
+//   }
 
-}
+// }
 
 
 
