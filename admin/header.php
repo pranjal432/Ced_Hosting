@@ -42,6 +42,10 @@ if (isset($_SESSION['admindata'])) {
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+
+  <script src='https://cdn.tiny.cloud/1/whzpsvep9cfngq7w3gt92m10orr4g5qtuckpwb8qpv7lxlzi/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+  </script>
+  
 </head>
 
 <body>

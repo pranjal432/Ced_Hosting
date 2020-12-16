@@ -223,7 +223,7 @@
                         <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['prod_id']; ?>" name="idfield" hidden>
 
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['html']; ?>" name="prodlink">
+                          <input type="textarea" class="mytextarea" class="form-control validate" value="<?php  echo $row['html']; ?>" name="prodlink">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">html</label>
                         </div>
 

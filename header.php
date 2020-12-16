@@ -106,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										if($row['id']==1) {
 											continue;
 										}
-										if($row['prod_parent_id']==1) {
+										if($row['prod_parent_id']==1 && $row['prod_available']==1) {
 											echo '<li class="';
 											if($filename == "catpage.php?id=".$row['id']."" ) :
 												echo 'active';

@@ -65,7 +65,7 @@
                     
                     
                 ?>
-                 <option style="height:85px;" value="<?php echo $row['prod_parent_id']; ?>">
+                 <option style="height:85px;" value="<?php echo $row['id']; ?>">
                     <?php echo $row['prod_name']; ?></option>
                     <?php
                         }
@@ -95,7 +95,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"></span>
                     </div>
-                    <input class="form-control" placeholder="Link" type="text" name="link">
+                    <input type="textarea" class="form-control" placeholder="html"  class="mytextarea" name="link">
                   </div>
                 </div>
                 
@@ -252,7 +252,7 @@
                         <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['id']; ?>" name="idfield" hidden>
 
                         <div class="md-form mb-4">
-                          <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['html']; ?>" name="prodlink">
+                          <input type="textarea" class="mytextarea" value="" name="prodlink">
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">html</label>
                         </div>
 

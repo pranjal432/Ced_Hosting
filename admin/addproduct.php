@@ -58,7 +58,7 @@
                               if($row['id']==1) {
                                 continue;
                               }
-                              if($row['prod_parent_id']==1) {
+                              if($row['prod_parent_id']==1 && $row['prod_available']==1) {
 
                                 echo '<option value="'.$row['id'].'">'.$row['prod_name'].'</option>';
 
@@ -90,7 +90,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Page URL</label>
-                        <input type="text" name="pageurl" class="form-control" placeholder="Page URL">
+                        <input type="textarea" class="mytextarea" name="pageurl" class="form-control" placeholder="Page URL">
                         <p id="produrl"></p>
                       </div>
                     </div>
