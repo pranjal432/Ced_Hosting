@@ -95,7 +95,8 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"></span>
                     </div>
-                    <input type="textarea" class="form-control" placeholder="html"  class="mytextarea" name="link">
+                    <input type="text" class="form-control" placeholder="html" name="link">
+                    <!-- <textarea value="html" name="link" class="mytextarea"></textarea> -->
                   </div>
                 </div>
                 
@@ -252,7 +253,8 @@
                         <input type="text" id="defaultForm-pass" class="form-control validate" value="<?php  echo $row['id']; ?>" name="idfield" hidden>
 
                         <div class="md-form mb-4">
-                          <input type="textarea" class="mytextarea" value="" name="prodlink">
+                          <!-- <input type="textarea" class="mytextarea" value="" name="prodlink"> -->
+                          <textarea class="mytextarea" name="prodlink" style="width:400px;"><?php echo $row['html']; ?></textarea>
                           <label data-error="wrong" data-success="right" for="defaultForm-pass">html</label>
                         </div>
 

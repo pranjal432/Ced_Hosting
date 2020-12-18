@@ -1,8 +1,15 @@
 <?php
 
+    session_start();
     require "header.php";
     require "User.php";
-    $connn=new Dbcon();
+	$connn=new Dbcon();
+	//$_SESSION['cart']=array();
+	//$_SESSION['cart']=array();
+	if(!isset($_SESSION['cart']))
+	{
+	$_SESSION['cart']=array();
+	}
 
     if(isset($_GET['id'])) {
         $id=$_GET['id'];
@@ -88,31 +95,54 @@
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+	  <form method="POST">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+        <h4 class="modal-title w-100 font-weight-bold">Buy Products</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body mx-3">
+	  <div class="md-form mb-5">
+	  <input type="hidden" name="hiddenfield1" value="<?php echo $row2['prod_id']; ?>">
+          <input type="text" id="defaultForm-email" name="prodname" value="<?php echo $row['prod_name']; ?>" class="form-control validate" readonly>
+		  <?php $a=$row2['prod_name'];?>
+          <label data-error="wrong" data-success="right" for="defaultForm-email">Product Name</label>
+        </div>
+		<br><br>
         <div class="md-form mb-5">
           
-          <input type="email" id="defaultForm-email" class="form-control validate">
+          <!-- <input type="email" id="defaultForm-email" class="form-control validate"> -->
+		  <select name="selectplan<?php echo $row2['prod_id']; ?>" class="selectplan" style="width:400px;">
+		      <option selected hidden>--Select Plan--</option>
+			  <option value="<?php echo $row2['mon_price']; ?>">Monthly</option>
+			  <option value="<?php echo $row2['annual_price']; ?>">Yearly</option>
+			  
+		  </select><br>
           <label data-error="wrong" data-success="right" for="defaultForm-email">Select plan which you want</label>
         </div>
 
       </div>
-      <center><div class="modal-footer d-flex justify-content-center">
-        <a href="" class="a">Buy Now</a>
-      </div></center>
+      <center>
+	  <div class="linux-bottom">
+        <!-- <a href="" class="a" class="buynow">Buy Now</a> -->
+		<input type="hidden" name="hiddenfield" value="<?php echo $row2['prod_id']; ?>">
+		<input type="submit" value="Buy Now" name="buynow<?php echo $row2['prod_id']; ?>" class="buynow btn btn-md btn-danger">
+      </div>
+	  </center>
+	  </form>
     </div>
   </div>
 </div>
+
+
                                             
 											<?php
 													}
 												}
 											}
+										} else {
+											echo "<h1>No products available in this category!!</h1>";
 										}
 
 											?>
@@ -188,6 +218,42 @@
 				</div>
 
 <?php
+ if(isset($_POST['hiddenfield'])) {
+    if (isset($_POST['buynow'.$_POST['hiddenfield']])) {
+
+		//echo '<script>alert("'.$_POST['buynow'.$_POST['hiddenfield']].'");</script>';
+		//$js3 = json_decode($row2['description'], true);
+		$hiddenfield =isset($_POST['hiddenfield'])?$_POST['hiddenfield']:'';
+		$hiddenfield1 =isset($_POST['hiddenfield1'])?$_POST['hiddenfield1']:'';
+		$plan=isset($_POST['selectplan'.$_POST['hiddenfield']]) ? $_POST['selectplan'.$_POST['hiddenfield']]:'';
+		$name=$_POST['prodname'];
+		echo $plan;
+		echo $name;
+		$arr=array("productname"=>$name,"Plan in Rs."=>$plan." Rs.");
+		//echo '<script>alert("'.$name.'");</script>';
+		//$arr=array("prod_id"=>$row2['prod_id'],"productname"=>$row['prod_name'],"webspace"=>$js3['webspace'],"bandwidth"=>$js3['bandwidth'],"freedomain"=>$js3['freedomain'],"ltsupport"=>$js3['ltsupport'],"mailbox"=>$js3['mailbox'],"plan"=>$plan,"sku"=>$row2['sku']);
+		// $arr=array("plan"=> $plan);
+		// print_r($arr);
+
+		array_push($_SESSION['cart'], $arr);
+
+		print_r($_SESSION['cart']);
+
+		echo '<script>window.location="cart.php";</script>';
+
+
+		//echo '<script>alert("'.$_SESSION['cart'].'");</script>';
+		
+
+
+	}
+}
+
+    
+
+?>
+
+<?php
 		} else {
 			echo '<script>alert("Please provide existed id to the category page!!");
 		window.location="index.php";
@@ -204,3 +270,21 @@
     require "footer.php";
 
 ?>
+
+<script>
+
+
+	$(".buynow").attr("disabled",true);
+
+
+    $(".selectplan").change(function() {
+
+		$selectplan=$(".selectplan").val();
+
+		if($selectplan!="") {
+			$(".buynow").attr("disabled",false);
+		}
+
+	});
+
+</script>

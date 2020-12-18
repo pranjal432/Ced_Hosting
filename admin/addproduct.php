@@ -90,7 +90,7 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Page URL</label>
-                        <input type="textarea" class="mytextarea" name="pageurl" class="form-control" placeholder="Page URL">
+                        <input type="text" name="pageurl" class="form-control" placeholder="Page URL">
                         <p id="produrl"></p>
                       </div>
                     </div>
